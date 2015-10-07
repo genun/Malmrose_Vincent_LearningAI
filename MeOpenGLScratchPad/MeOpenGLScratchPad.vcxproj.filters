@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Rendering\Renderer.cpp" />
+    <ClCompile Include="IO\FileIO.cpp" />
+    <ClCompile Include="MyGame.cpp" />
+    <ClCompile Include="MyGame_moc.cpp" />
+    <ClCompile Include="DebugTools\meSlider.cpp" />
+    <ClCompile Include="Camera\Camera.cpp" />
+    <ClCompile Include="DebugTools\Menu\DebugMenu.cpp" />
+    <ClCompile Include="DebugTools\Menu\Infos\SliderInfo.cpp" />
+    <ClCompile Include="DebugTools\Menu\Infos\CheckBoxInfo.cpp" />
+    <ClCompile Include="DebugTools\Shapes\DebugShape.cpp" />
+    <ClCompile Include="DebugTools\meSlider_moc.cpp" />
+    <ClCompile Include="Shapes\ShapeMaker.cpp" />
+    <ClCompile Include="Breakout\Ball.cpp" />
+    <ClCompile Include="Breakout\Brick.cpp" />
+    <ClCompile Include="Breakout\Paddle.cpp" />
+    <ClCompile Include="Breakout\Wall.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Rendering\Renderer.h" />
+    <ClInclude Include="IO\FileIO.h" />
+    <ClInclude Include="Rendering\Helpers\BufferInfo.h" />
+    <ClInclude Include="Rendering\Helpers\Geometry.h" />
+    <ClInclude Include="Rendering\Helpers\Renderables.h" />
+    <ClInclude Include="Rendering\Helpers\ShaderInfo.h" />
+    <ClInclude Include="Rendering\Helpers\VertexLayoutInfo.h" />
+    <ClInclude Include="Rendering\ParameterType.h" />
+    <ClInclude Include="MyGame.h" />
+    <ClInclude Include="Rendering\Helpers\PassInfo.h" />
+    <ClInclude Include="Rendering\Helpers\UniformInfo.h" />
+    <ClInclude Include="Rendering\Helpers\TextureInfo.h" />
+    <ClInclude Include="DebugTools\meSlider.h" />
+    <ClInclude Include="Camera\Camera.h" />
+    <ClInclude Include="DebugTools\Menu\DebugMenu.h" />
+    <ClInclude Include="DebugTools\Menu\Infos\WatchInfo.h" />
+    <ClInclude Include="DebugTools\Menu\Infos\SliderInfo.h" />
+    <ClInclude Include="DebugTools\Menu\Infos\CheckBoxInfo.h" />
+    <ClInclude Include="DebugTools\Shapes\DebugShape.h" />
+    <ClInclude Include="Shapes\ShapeMaker.h" />
+    <ClInclude Include="Shapes\MyVertex.h" />
+    <ClInclude Include="Shapes\MyShapeData.h" />
+    <ClInclude Include="Breakout\Ball.h" />
+    <ClInclude Include="Breakout\Brick.h" />
+    <ClInclude Include="Breakout\Paddle.h" />
+    <ClInclude Include="Breakout\Wall.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DebugTools\Shapes\VertexShader.glsl" />
+    <None Include="DebugTools\Shapes\FragmentShader.glsl" />
+    <None Include="BinaryData\MyBinaryFile.bin" />
+    <None Include="ShaderCode\NormalMapVertex.glsl" />
+    <None Include="ShaderCode\NormalMapFragment.glsl" />
+    <None Include="ShaderCode\OgreVertexShader.glsl" />
+    <None Include="ShaderCode\OgreFragmentShader.glsl" />
+    <None Include="ShaderCode\TableVertexShader.glsl" />
+    <None Include="ShaderCode\TableFragmentShader.glsl" />
+    <None Include="ShaderCode\DominateVertexShader.glsl" />
+    <None Include="ShaderCode\DominateFragmentShader.glsl" />
+    <None Include="ShaderCode\LightVertexShader.glsl" />
+    <None Include="ShaderCode\LightFragmentShader.glsl" />
+    <None Include="ShaderCode\GrowlitheFragmentShader.glsl" />
+    <None Include="ShaderCode\GrowlitheVertexShader.glsl" />
+    <None Include="ShaderCode\PizzaVertexShader.glsl" />
+    <None Include="ShaderCode\PizzaFragmentShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\ShapeNormalMap.png" />
+    <Image Include="Textures\tux.png" />
+    <Image Include="Textures\OgreNormalMap.png" />
+  </ItemGroup>
+</Project>

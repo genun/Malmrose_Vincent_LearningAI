@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A6029006-F9E4-4474-82BB-D17923780A78}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MeOpenGLScratchPad</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SourceDir)..\Middleware\Qt\include;$(SourceDir)..\Middleware\glew\include;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SourceDir)..\Middleware\glew\lib;$(SourceDir)..\Middleware\Qt\lib;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>QtCored4.lib;QtGuid4.lib;QtOpenGLd4.lib;glew32d.lib;opengl32.lib;NeumontTools.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Breakout\Ball.cpp" />
+    <ClCompile Include="Breakout\Brick.cpp" />
+    <ClCompile Include="Breakout\Paddle.cpp" />
+    <ClCompile Include="Breakout\Wall.cpp" />
+    <ClCompile Include="DebugTools\Shapes\DebugShape.cpp" />
+    <ClCompile Include="DebugTools\Menu\DebugMenu.cpp" />
+    <ClCompile Include="DebugTools\Menu\Infos\CheckBoxInfo.cpp" />
+    <ClCompile Include="DebugTools\Menu\Infos\SliderInfo.cpp" />
+    <ClCompile Include="IO\FileIO.cpp" />
+    <ClCompile Include="MyGame.cpp" />
+    <ClCompile Include="MyGame_moc.cpp" />
+    <ClCompile Include="Camera\Camera.cpp" />
+    <ClCompile Include="DebugTools\meSlider.cpp" />
+    <ClCompile Include="DebugTools\meSlider_moc.cpp" />
+    <ClCompile Include="Rendering\Renderer.cpp" />
+    <ClCompile Include="Shapes\ShapeMaker.cpp" />
+    <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Breakout\Ball.h" />
+    <ClInclude Include="Breakout\Brick.h" />
+    <ClInclude Include="Breakout\Paddle.h" />
+    <ClInclude Include="Breakout\Wall.h" />
+    <ClInclude Include="DebugTools\Shapes\DebugShape.h" />
+    <ClInclude Include="DebugTools\Menu\DebugMenu.h" />
+    <ClInclude Include="DebugTools\Menu\Infos\CheckBoxInfo.h" />
+    <ClInclude Include="DebugTools\Menu\Infos\WatchInfo.h" />
+    <ClInclude Include="DebugTools\Menu\Infos\SliderInfo.h" />
+    <ClInclude Include="MyGame.h" />
+    <ClInclude Include="Rendering\Helpers\TextureInfo.h" />
+    <ClInclude Include="Rendering\Helpers\PassInfo.h" />
+    <ClInclude Include="Rendering\Helpers\UniformInfo.h" />
+    <ClInclude Include="Rendering\Helpers\VertexLayoutInfo.h" />
+    <ClInclude Include="Rendering\ParameterType.h" />
+    <ClInclude Include="IO\FileIO.h" />
+    <ClInclude Include="Rendering\Helpers\Renderables.h" />
+    <ClInclude Include="Rendering\Helpers\BufferInfo.h" />
+    <ClInclude Include="Camera\Camera.h" />
+    <ClInclude Include="Rendering\Helpers\Geometry.h" />
+    <ClInclude Include="DebugTools\meSlider.h" />
+    <ClInclude Include="Rendering\Renderer.h" />
+    <ClInclude Include="Rendering\Helpers\ShaderInfo.h" />
+    <ClInclude Include="Shapes\MyShapeData.h" />
+    <ClInclude Include="Shapes\MyVertex.h" />
+    <ClInclude Include="Shapes\ShapeMaker.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BinaryData\MyBinaryFile.bin" />
+    <None Include="DebugTools\Shapes\FragmentShader.glsl" />
+    <None Include="DebugTools\Shapes\VertexShader.glsl" />
+    <None Include="ShaderCode\LightVertexShader.glsl" />
+    <None Include="ShaderCode\LightFragmentShader.glsl" />
+    <None Include="ShaderCode\DominateFragmentShader.glsl" />
+    <None Include="ShaderCode\NormalMapFragment.glsl" />
+    <None Include="ShaderCode\NormalMapVertex.glsl" />
+    <None Include="ShaderCode\DominateVertexShader.glsl" />
+    <None Include="ShaderCode\OgreFragmentShader.glsl" />
+    <None Include="ShaderCode\OgreVertexShader.glsl" />
+    <None Include="ShaderCode\PizzaFragmentShader.glsl" />
+    <None Include="ShaderCode\PizzaVertexShader.glsl" />
+    <None Include="ShaderCode\TableFragmentShader.glsl" />
+    <None Include="ShaderCode\TableVertexShader.glsl" />
+    <None Include="ShaderCode\GrowlitheVertexShader.glsl" />
+    <None Include="ShaderCode\GrowlitheFragmentShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\OgreNormalMap.png" />
+    <Image Include="Textures\ShapeNormalMap.png" />
+    <Image Include="Textures\tux.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
