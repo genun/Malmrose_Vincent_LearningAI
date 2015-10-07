@@ -1,0 +1,34 @@
+﻿Build started 10/7/2015 2:18:32 PM.
+     1>Project "D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\MeOpenGLScratchPad.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ID:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\ /I..\Middleware\Qt\include /I..\Middleware\glew\include /I..\Middleware\glm /I..\Middleware\NeumontTools\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt MyGame.cpp MyGame_moc.cpp Source.cpp
+         MyGame_moc.cpp
+         MyGame.cpp
+         Generating Code...
+         Compiling...
+         Source.cpp
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\MeOpenGLScratchPad.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\Middleware\glew\lib /LIBPATH:..\Middleware\Qt\lib /LIBPATH:..\Middleware\glm /LIBPATH:..\Middleware\NeumontTools\lib QtCored4.lib QtGuid4.lib QtOpenGLd4.lib glew32d.lib opengl32.lib NeumontTools.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\MeOpenGLScratchPad.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\MeOpenGLScratchPad.lib" /MACHINE:X86 Debug\Ball.obj
+         Debug\Brick.obj
+         Debug\Paddle.obj
+         Debug\Wall.obj
+         Debug\DebugShape.obj
+         Debug\DebugMenu.obj
+         Debug\CheckBoxInfo.obj
+         Debug\SliderInfo.obj
+         Debug\FileIO.obj
+         Debug\MyGame.obj
+         Debug\MyGame_moc.obj
+         Debug\Camera.obj
+         Debug\meSlider.obj
+         Debug\meSlider_moc.obj
+         Debug\Renderer.obj
+         Debug\ShapeMaker.obj
+         Debug\Source.obj
+         MeOpenGLScratchPad.vcxproj -> D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\MeOpenGLScratchPad.exe
+     1>Done Building Project "D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\MeOpenGLScratchPad.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.72
