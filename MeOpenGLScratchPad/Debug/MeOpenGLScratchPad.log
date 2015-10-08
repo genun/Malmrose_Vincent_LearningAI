@@ -1,15 +1,27 @@
-﻿Build started 10/7/2015 2:18:32 PM.
+﻿Build started 10/8/2015 1:38:53 PM.
      1>Project "D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\MeOpenGLScratchPad.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ID:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\ /I..\Middleware\Qt\include /I..\Middleware\glew\include /I..\Middleware\glm /I..\Middleware\NeumontTools\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt MyGame.cpp MyGame_moc.cpp Source.cpp
-         MyGame_moc.cpp
-         MyGame.cpp
-         Generating Code...
-         Compiling...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ID:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\\Engine /ID:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\\Core\include /ID:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\ /I..\Middleware\Qt\include /I..\Middleware\glew\include /I..\Middleware\glm /I..\Middleware\NeumontTools\include /ID:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\..\Core\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source.cpp
          Source.cpp
-         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\MeOpenGLScratchPad.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\Middleware\glew\lib /LIBPATH:..\Middleware\Qt\lib /LIBPATH:..\Middleware\glm /LIBPATH:..\Middleware\NeumontTools\lib QtCored4.lib QtGuid4.lib QtOpenGLd4.lib glew32d.lib opengl32.lib NeumontTools.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\MeOpenGLScratchPad.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\MeOpenGLScratchPad.lib" /MACHINE:X86 Debug\Ball.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\MeOpenGLScratchPad.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\ /LIBPATH:D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\\Core\lib /LIBPATH:D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\ /LIBPATH:..\Middleware\glew\lib /LIBPATH:..\Middleware\Qt\lib /LIBPATH:..\Middleware\glm /LIBPATH:..\Middleware\NeumontTools\lib Engine.lib Core.lib QtCored4.lib QtGuid4.lib QtOpenGLd4.lib glew32d.lib opengl32.lib NeumontTools.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\MeOpenGLScratchPad.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\MeOpenGLScratchPad.lib" /MACHINE:X86 /fs Debug\Bullet.obj
+         Debug\DrawV.obj
+         Debug\enemy.obj
+         Debug\enemyManager.obj
+         Debug\hr_timer.obj
+         Debug\AsterMain.obj
+         Debug\Monster.obj
+         Debug\orbiter.obj
+         Debug\Particle.obj
+         Debug\ParticleEffects.obj
+         Debug\ParticleManager.obj
+         Debug\profiler.obj
+         Debug\Random.obj
+         Debug\RunsTheGame.obj
+         Debug\Shape.obj
+         Debug\SpaceShip.obj
+         Debug\Turret.obj
+         Debug\Ball.obj
          Debug\Brick.obj
          Debug\Paddle.obj
          Debug\Wall.obj
@@ -26,9 +38,10 @@
          Debug\Renderer.obj
          Debug\ShapeMaker.obj
          Debug\Source.obj
+     1>LINK : warning LNK4044: unrecognized option '/fs'; ignored
          MeOpenGLScratchPad.vcxproj -> D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Debug\MeOpenGLScratchPad.exe
      1>Done Building Project "D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\MeOpenGLScratchPad.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.72
+Time Elapsed 00:00:01.48

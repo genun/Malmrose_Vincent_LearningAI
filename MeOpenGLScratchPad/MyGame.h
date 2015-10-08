@@ -1,7 +1,6 @@
 #ifndef MY_GAME
 #define MY_GAME
 
-
 #include <Qt\qobject.h>
 #include <Qt\qtimer.h>
 #include <QtGui\qmouseevent>

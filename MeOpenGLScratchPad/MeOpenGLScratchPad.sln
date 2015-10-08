@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MeOpenGLScratchPad", "MeOpenGLScratchPad.vcxproj", "{A6029006-F9E4-4474-82BB-D17923780A78}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{1A4FE7E9-979F-484B-98C4-B439581F8157}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,10 @@ Global
 		{A6029006-F9E4-4474-82BB-D17923780A78}.Debug|Win32.Build.0 = Debug|Win32
 		{A6029006-F9E4-4474-82BB-D17923780A78}.Release|Win32.ActiveCfg = Release|Win32
 		{A6029006-F9E4-4474-82BB-D17923780A78}.Release|Win32.Build.0 = Release|Win32
+		{1A4FE7E9-979F-484B-98C4-B439581F8157}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1A4FE7E9-979F-484B-98C4-B439581F8157}.Debug|Win32.Build.0 = Debug|Win32
+		{1A4FE7E9-979F-484B-98C4-B439581F8157}.Release|Win32.ActiveCfg = Release|Win32
+		{1A4FE7E9-979F-484B-98C4-B439581F8157}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

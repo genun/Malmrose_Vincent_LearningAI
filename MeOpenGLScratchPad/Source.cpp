@@ -3,16 +3,27 @@
 #include <IO\FileIO.h>
 #include <Rendering\Helpers\Renderables.h>
 #include <MyGame.h>
+#include "Asteroids\AsterMain.h"
+
+bool Test_Asteroids = true;
 
 void main(int argumentCount, char* argumentVector[]){
-	QApplication app(argumentCount, argumentVector);
-	MyGame game;
+
+	if (Test_Asteroids){
+		AsterMain newGame;
+		newGame.run();
+	}
 	
-	if( ! game.initialize())
-		return;
+	else{
+		QApplication app(argumentCount, argumentVector);
+		MyGame game;
 
-	game.gameLoop();
+		if (!game.initialize())
+			return;
 
-	app.exec();
-	game.shutdown();
+		game.gameLoop();
+
+		app.exec();
+		game.shutdown();
+	};
 }

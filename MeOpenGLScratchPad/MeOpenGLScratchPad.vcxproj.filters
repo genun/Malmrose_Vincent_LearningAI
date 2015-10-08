@@ -18,6 +18,23 @@
     <ClCompile Include="Breakout\Brick.cpp" />
     <ClCompile Include="Breakout\Paddle.cpp" />
     <ClCompile Include="Breakout\Wall.cpp" />
+    <ClCompile Include="Asteroids\Bullet.cpp" />
+    <ClCompile Include="Asteroids\DrawV.cpp" />
+    <ClCompile Include="Asteroids\enemy.cpp" />
+    <ClCompile Include="Asteroids\enemyManager.cpp" />
+    <ClCompile Include="Asteroids\hr_timer.cpp" />
+    <ClCompile Include="Asteroids\Monster.cpp" />
+    <ClCompile Include="Asteroids\orbiter.cpp" />
+    <ClCompile Include="Asteroids\Particle.cpp" />
+    <ClCompile Include="Asteroids\ParticleEffects.cpp" />
+    <ClCompile Include="Asteroids\ParticleManager.cpp" />
+    <ClCompile Include="Asteroids\profiler.cpp" />
+    <ClCompile Include="Asteroids\Random.cpp" />
+    <ClCompile Include="Asteroids\RunsTheGame.cpp" />
+    <ClCompile Include="Asteroids\Shape.cpp" />
+    <ClCompile Include="Asteroids\SpaceShip.cpp" />
+    <ClCompile Include="Asteroids\Turret.cpp" />
+    <ClCompile Include="Asteroids\AsterMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rendering\Renderer.h" />
@@ -46,6 +63,23 @@
     <ClInclude Include="Breakout\Brick.h" />
     <ClInclude Include="Breakout\Paddle.h" />
     <ClInclude Include="Breakout\Wall.h" />
+    <ClInclude Include="Asteroids\Bullet.h" />
+    <ClInclude Include="Asteroids\DrawV.h" />
+    <ClInclude Include="Asteroids\enemy.h" />
+    <ClInclude Include="Asteroids\enemyManager.h" />
+    <ClInclude Include="Asteroids\hr_timer.h" />
+    <ClInclude Include="Asteroids\Monster.h" />
+    <ClInclude Include="Asteroids\orbiter.h" />
+    <ClInclude Include="Asteroids\Particle.h" />
+    <ClInclude Include="Asteroids\ParticleEffects.h" />
+    <ClInclude Include="Asteroids\ParticleManager.h" />
+    <ClInclude Include="Asteroids\profiler.h" />
+    <ClInclude Include="Asteroids\Random.h" />
+    <ClInclude Include="Asteroids\RunsTheGame.h" />
+    <ClInclude Include="Asteroids\Shape.h" />
+    <ClInclude Include="Asteroids\SpaceShip.h" />
+    <ClInclude Include="Asteroids\Turret.h" />
+    <ClInclude Include="Asteroids\AsterMain.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugTools\Shapes\VertexShader.glsl" />

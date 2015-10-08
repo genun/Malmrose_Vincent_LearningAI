@@ -52,13 +52,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SourceDir)..\Middleware\Qt\include;$(SourceDir)..\Middleware\glew\include;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Engine;$(SolutionDir)\Core\include;$(ProjectDir);$(SourceDir)..\Middleware\Qt\include;$(SourceDir)..\Middleware\glew\include;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\include;$(SolutionDir)..\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SourceDir)..\Middleware\glew\lib;$(SourceDir)..\Middleware\Qt\lib;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>QtCored4.lib;QtGuid4.lib;QtOpenGLd4.lib;glew32d.lib;opengl32.lib;NeumontTools.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)\Core\lib;$(SolutionDir)$(Configuration)\;$(SourceDir)..\Middleware\glew\lib;$(SourceDir)..\Middleware\Qt\lib;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Engine.lib;Core.lib;QtCored4.lib;QtGuid4.lib;QtOpenGLd4.lib;glew32d.lib;opengl32.lib;NeumontTools.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/fs %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -79,6 +80,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Asteroids\Bullet.cpp" />
+    <ClCompile Include="Asteroids\DrawV.cpp" />
+    <ClCompile Include="Asteroids\enemy.cpp" />
+    <ClCompile Include="Asteroids\enemyManager.cpp" />
+    <ClCompile Include="Asteroids\hr_timer.cpp" />
+    <ClCompile Include="Asteroids\AsterMain.cpp" />
+    <ClCompile Include="Asteroids\Monster.cpp" />
+    <ClCompile Include="Asteroids\orbiter.cpp" />
+    <ClCompile Include="Asteroids\Particle.cpp" />
+    <ClCompile Include="Asteroids\ParticleEffects.cpp" />
+    <ClCompile Include="Asteroids\ParticleManager.cpp" />
+    <ClCompile Include="Asteroids\profiler.cpp" />
+    <ClCompile Include="Asteroids\Random.cpp" />
+    <ClCompile Include="Asteroids\RunsTheGame.cpp" />
+    <ClCompile Include="Asteroids\Shape.cpp" />
+    <ClCompile Include="Asteroids\SpaceShip.cpp" />
+    <ClCompile Include="Asteroids\Turret.cpp" />
     <ClCompile Include="Breakout\Ball.cpp" />
     <ClCompile Include="Breakout\Brick.cpp" />
     <ClCompile Include="Breakout\Paddle.cpp" />
@@ -98,6 +116,23 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Asteroids\AsterMain.h" />
+    <ClInclude Include="Asteroids\Bullet.h" />
+    <ClInclude Include="Asteroids\DrawV.h" />
+    <ClInclude Include="Asteroids\enemy.h" />
+    <ClInclude Include="Asteroids\enemyManager.h" />
+    <ClInclude Include="Asteroids\hr_timer.h" />
+    <ClInclude Include="Asteroids\Monster.h" />
+    <ClInclude Include="Asteroids\orbiter.h" />
+    <ClInclude Include="Asteroids\Particle.h" />
+    <ClInclude Include="Asteroids\ParticleEffects.h" />
+    <ClInclude Include="Asteroids\ParticleManager.h" />
+    <ClInclude Include="Asteroids\profiler.h" />
+    <ClInclude Include="Asteroids\Random.h" />
+    <ClInclude Include="Asteroids\RunsTheGame.h" />
+    <ClInclude Include="Asteroids\Shape.h" />
+    <ClInclude Include="Asteroids\SpaceShip.h" />
+    <ClInclude Include="Asteroids\Turret.h" />
     <ClInclude Include="Breakout\Ball.h" />
     <ClInclude Include="Breakout\Brick.h" />
     <ClInclude Include="Breakout\Paddle.h" />
