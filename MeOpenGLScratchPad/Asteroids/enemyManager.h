@@ -12,6 +12,7 @@
 struct enemyManager{
 	std::vector<enemy> enemies;
 	float previous, current;
+	float spawnRate = 0.5f;
 	void add(enemy en);
 	void death(int i, ParticleManager& effect);
 	void update(float dt, bullet bull, ParticleManager& effect, SpaceShip ship, int& score, int& hp);

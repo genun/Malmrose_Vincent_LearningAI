@@ -35,6 +35,7 @@
     <ClCompile Include="Asteroids\SpaceShip.cpp" />
     <ClCompile Include="Asteroids\Turret.cpp" />
     <ClCompile Include="Asteroids\AsterMain.cpp" />
+    <ClCompile Include="Other_Tests\RBM.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rendering\Renderer.h" />
@@ -80,6 +81,8 @@
     <ClInclude Include="Asteroids\SpaceShip.h" />
     <ClInclude Include="Asteroids\Turret.h" />
     <ClInclude Include="Asteroids\AsterMain.h" />
+    <ClInclude Include="Other_Tests\RBM.h" />
+    <ClInclude Include="Other_Tests\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugTools\Shapes\VertexShader.glsl" />

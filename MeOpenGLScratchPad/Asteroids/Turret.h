@@ -8,7 +8,7 @@ struct Turret{
 	Vector2d Points[9];
 	Matrix3 rotation, translation, transformation;
 	void init(Matrix3 mat);
-	void update(float dt, Matrix3 ShipTrans, Vector2d MousePoint);
+	void update(float dt, Matrix3 ShipTrans, Matrix3 shipRotation);// Vector2d MousePoint);
 	void draw(Core::Graphics& g);
 };
 

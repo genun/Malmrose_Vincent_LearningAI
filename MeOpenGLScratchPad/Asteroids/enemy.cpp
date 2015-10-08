@@ -10,8 +10,8 @@
 	void update();
 	void draw();*/
 
-void enemy::update(Vector2d shipPos){
-	velocity = Vector2d(shipPos - pos).Normalized() * velocity.Length();
+void enemy::update(Vector2d shipPos, float dt){
+	//velocity = Vector2d(shipPos - pos).Normalized() * velocity.Length();
 	pos = pos + velocity;
 	
 	Vector2d dir =  shipPos - pos;
@@ -22,9 +22,7 @@ void enemy::update(Vector2d shipPos){
 	rotation.mat[0][1] = -dir.x;
 	rotation.mat[1][1] = -dir.y;
 
-	if (timeFlying > 8.0f){
-		Delete(enemy());
-	}
+	timeFlying += dt;
 }
 
 void enemy::draw(Core::Graphics g){
@@ -41,17 +39,22 @@ void enemy::draw(Core::Graphics g){
 void enemy::init(){
 	velocity = Vector2d(0, 3.0f);
 	float start = rand.randomInRange(0, 3);
-	if(start < 1){
-		pos = Vector2d(rand.randomInRange(-30, -10), rand.randomInRange(0,799));
+
+	if(start <= 1){
+		pos = Vector2d(rand.randomInRange(-30, -10), rand.randomInRange(0,399));
+		velocity = Vector2d(rand.randomInRange(minLongspeed, maxLongspeed), rand.randomInRange(-angleSpeed, angleSpeed));
 	}
 	else if(start > 1 && start <= 2){
-		pos = Vector2d(rand.randomInRange(0, 799), rand.randomInRange(-40, -10));
+		pos = Vector2d(rand.randomInRange(0, 399), rand.randomInRange(-40, -10));
+		velocity = Vector2d(rand.randomInRange(-angleSpeed, angleSpeed), rand.randomInRange(minLongspeed, maxLongspeed));
 	}
 	else if(start > 2 && start <= 3){
-		pos = Vector2d(rand.randomInRange(810, 840), rand.randomInRange(0,799));
+		pos = Vector2d(rand.randomInRange(410, 440), rand.randomInRange(0, 399));
+		velocity = Vector2d(rand.randomInRange(-minLongspeed, -maxLongspeed), rand.randomInRange(-angleSpeed, angleSpeed));
 	}
 	else if(start > 3 && start <= 4){
-		pos = Vector2d(rand.randomInRange(0, 799), rand.randomInRange(810, 840));
+		pos = Vector2d(rand.randomInRange(0, 399), rand.randomInRange(410, 440));
+		velocity = Vector2d(rand.randomInRange(-angleSpeed, angleSpeed), rand.randomInRange(-minLongspeed, -maxLongspeed));
 	}
 	
 	enemNode[0] = Vector2d(-4, 0);

@@ -6,26 +6,26 @@ RunTheGame::RunTheGame(){
 
 void RunTheGame::init(){
 	RunTheGame::drawBorder = false;
-	meShip.position = Vector2d(400.0f, 400.0f);
-	meShip.translation.mat[0][2] = 400.0f;
-	meShip.translation.mat[1][2] = 400.0f;
+	meShip.position = Vector2d(200.0f, 200.0f);
+	meShip.translation.mat[0][2] = 200.0f;
+	meShip.translation.mat[1][2] = 200.0f;
 	
 	e.init();
 
 	turret.init(meShip.translation);
-	myLERPER.Lposition = Vector2d(100.0f, 100.0f);
+	myLERPER.Lposition = Vector2d(50.0f, 50.0f);
 
-	RunTheGame::SCREEN_WIDTH = 800;
-	RunTheGame::SCREEN_HEIGHT = 800;
+	RunTheGame::SCREEN_WIDTH = 400;
+	RunTheGame::SCREEN_HEIGHT = 400;
 
 	Matrix3 rotate = Matrix3();
 	rotate.Rotation(5);
 	Matrix3 trans = Matrix3();
-	trans.mat[0][2] = 500;
-	trans.mat[1][2] = 500;
+	trans.mat[0][2] = 250;
+	trans.mat[1][2] = 250;
 	Matrix3 nextOrbit = Matrix3();
-	nextOrbit.mat[0][2] = 30;
-	orbit.init(rotate, trans, nextOrbit, 0.2f, Vector2d(30, 30));
+	nextOrbit.mat[0][2] = 15;
+	orbit.init(rotate, trans, nextOrbit, 0.2f, Vector2d(15, 15));
 	profile.initialize();
 	ScreenType = 0;
 	width = SCREEN_WIDTH + 0.0f;
@@ -47,29 +47,44 @@ void RunTheGame::init(){
 
 bool RunTheGame::MeUpdateFn(float dt){
 	dt;
+	MainUpdate(dt);
 
-	if(ScreenType == 0){
-		TitleUpdate(dt);
+	if (ScreenType == 2){
+		init();
+		if (win){
+			//TODO: notify AI of success
+		}
+		else{
+			//TODO: notify AI of failure
+		}
 	}
-	else if (ScreenType == 1){
-		MainUpdate(dt);
-	}
-	else{
-		EndUpdate(dt);
-	}
+
+
+	//if(ScreenType == 0){
+	//	TitleUpdate(dt);
+	//}
+	//else if (ScreenType == 1){
+	//	MainUpdate(dt);
+	//}
+	//else{
+	//	EndUpdate(dt);
+	//}
 	return false;
 }
 
 void RunTheGame::MeDrawFn(Graphics& graphics){
-	if(ScreenType == 0){
-		TitleDraw(graphics);
-	}
-	else if (ScreenType == 1){
-		MainDraw(graphics);
-	}
-	else{
-		EndDraw(graphics);
-	}
+	MainDraw(graphics);
+
+	//if(ScreenType == 0){
+	//	TitleDraw(graphics);
+	//}
+	//else if (ScreenType == 1){
+	//	MainDraw(graphics);
+	//}
+	//else{
+	//	EndDraw(graphics);
+	//}
+	//
 	/*
 	memoryInfo << BlockCount << local state.lCounts[_client_Block] << "\n"
 	<< total bytes << localState.Lsizes[clientblock]
@@ -132,21 +147,23 @@ void RunTheGame::MainUpdate(float dt){
 		meShip.velocity = meShip.velocity + (meShip.rotation * (-1 * meShip.Speed));
 	}
 
-	if(Core::Input::IsPressed(Core::Input::BUTTON_RIGHT)){
-		effect.add(ParticleEffects(rand.randomColor(200, 50, 50, 55), meShip));
-	}
+	//FLAMETHROWER WOOOO
+	//if(Core::Input::IsPressed(Core::Input::BUTTON_RIGHT)){
+	//	effect.add(ParticleEffects(rand.randomColor(200, 50, 50, 55), meShip));
+	//}
 	time = timer.interval();
 	profile.addEntry(time);
 	
 	//myLERPER.update(dt);
 	//time = timer.interval();
 	//profile.addEntry(time);
-	
+
+	/*
 	int mouseX, mouseY;
 	Core::Input::GetMousePos(mouseX, mouseY);
 	float x = mouseX - 0.0f;
-	float y = mouseY - 0.0f;
-	turret.update(dt, meShip.translation, Vector2d(x, y));
+	float y = mouseY - 0.0f;*/
+	turret.update(dt, meShip.translation, meShip.rotation);
 	time = timer.interval();
 	profile.addEntry(time);
 	
@@ -265,3 +282,4 @@ void RunTheGame::EndDraw(Graphics& g){
 
 
 }
+

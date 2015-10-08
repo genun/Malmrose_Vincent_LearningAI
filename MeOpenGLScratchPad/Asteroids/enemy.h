@@ -11,9 +11,16 @@ struct enemy{
 	Vector2d velocity;
 	Random rand;
 	Vector2d enemNode[15];
+	float timeFlying = 0.0f;
+	float lifeTime = 6.0f;
+
+	float minLongspeed = 3.0f;
+	float maxLongspeed = 5.0f;
+	float angleSpeed = 3.0f;
+
 	void init();
 	void shutdown();
-	void update(Vector2d shipPos);
+	void update(Vector2d shipPos, float dt);
 	void draw(Core::Graphics g);
 	enemy();
 	~enemy();

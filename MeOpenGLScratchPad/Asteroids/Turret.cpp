@@ -25,15 +25,18 @@ void Turret::draw(Core::Graphics& g){
 	}
 }
 
-void Turret::update(float dt, Matrix3 ShipTrans, Vector2d MousePoint){
+void Turret::update(float dt, Matrix3 ShipTrans, Matrix3 shipRotation){
 	dt;
 	translation = ShipTrans;
-	Vector2d dir =  MousePoint - Vector2d(ShipTrans.mat[0][2], ShipTrans.mat[1][2]);
+	//MousePoint - 
+
+	Vector2d dir = Vector2d(ShipTrans.mat[0][2], ShipTrans.mat[1][2]);
 	dir = dir.Normalized();
 	Vector2d otherDir = dir.PerpCCW();
 	rotation.mat[0][0] = -otherDir.x;
 	rotation.mat[1][0] = -otherDir.y;
 	rotation.mat[0][1] = -dir.x;
 	rotation.mat[1][1] = -dir.y;
-	transformation = translation * rotation;
+	rotation = shipRotation;
+	transformation = translation * shipRotation;
 };

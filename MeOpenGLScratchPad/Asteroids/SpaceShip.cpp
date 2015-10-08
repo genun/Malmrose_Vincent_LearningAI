@@ -54,70 +54,74 @@ void SpaceShip::update(float dt, bool& drawBorder, float width, float height){
 	position = Vector2d(translation.mat[0][2], translation.mat[1][2]);
 
 	position = position + SpaceShip::velocity;
-	if(typeChange == 2){
-		wallBounce();
-	}
 
-	else if(typeChange == 3){
-		drawBorder = true;
-		/*
-			middle top,
-			middle right,
-			middle bottom,
-			middle left
-		*/
-		Vector2d v1 = Vector2d(width / 2, 0); 
-		Vector2d v2 = Vector2d(width, height / 2);
-		Vector2d v3 = Vector2d(width / 2, height);
-		Vector2d v4 = Vector2d(0, height /2);
+#pragma region barrier changes
+	//
+	//if(typeChange == 2){
+	//	wallBounce();
+	//}
 
-		Vector2d w1 = v2 - v1;
-		Vector2d w2 = w1.PerpCW();
-		Vector2d w3 = v4 - v3;
-		Vector2d w4 = w3.PerpCW();
+	//else if(typeChange == 3){
+	//	drawBorder = true;
+	//	/*
+	//		middle top,
+	//		middle right,
+	//		middle bottom,
+	//		middle left
+	//	*/
+	//	Vector2d v1 = Vector2d(width / 2, 0); 
+	//	Vector2d v2 = Vector2d(width, height / 2);
+	//	Vector2d v3 = Vector2d(width / 2, height);
+	//	Vector2d v4 = Vector2d(0, height /2);
 
-		Vector2d s1 = position - v1;
-		Vector2d s2 = position - v3;
-		if (!inside){
-			wallBounce();
-		}
-		if(s1.Dot(w1.PerpCCW()) >= 0  && s1.Dot(w2.PerpCCW()) >= 0 && s2.Dot(w3.PerpCCW()) >= 0 && s2.Dot(w4.PerpCCW()) >= 0){
-			inside = true;
-		}
+	//	Vector2d w1 = v2 - v1;
+	//	Vector2d w2 = w1.PerpCW();
+	//	Vector2d w3 = v4 - v3;
+	//	Vector2d w4 = w3.PerpCW();
 
-		if(s1.Dot(w1.PerpCCW()) < 0 && inside){
-			bounce(w1);
-		}
-		if(s1.Dot(w2.PerpCCW()) < 0 && inside){
-			bounce(w2);
-		}
-		if(s2.Dot(w3.PerpCCW()) < 0 && inside){
-			bounce(w3);
-		}
-		if(s2.Dot(w4.PerpCCW()) < 0 && inside){
-			bounce(w4);
-		}
-	}
+	//	Vector2d s1 = position - v1;
+	//	Vector2d s2 = position - v3;
+	//	if (!inside){
+	//		wallBounce();
+	//	}
+	//	if(s1.Dot(w1.PerpCCW()) >= 0  && s1.Dot(w2.PerpCCW()) >= 0 && s2.Dot(w3.PerpCCW()) >= 0 && s2.Dot(w4.PerpCCW()) >= 0){
+	//		inside = true;
+	//	}
 
-	else{
+	//	if(s1.Dot(w1.PerpCCW()) < 0 && inside){
+	//		bounce(w1);
+	//	}
+	//	if(s1.Dot(w2.PerpCCW()) < 0 && inside){
+	//		bounce(w2);
+	//	}
+	//	if(s2.Dot(w3.PerpCCW()) < 0 && inside){
+	//		bounce(w3);
+	//	}
+	//	if(s2.Dot(w4.PerpCCW()) < 0 && inside){
+	//		bounce(w4);
+	//	}
+	//}
+#pragma endregion
+
+	/*else{*/
 		if (position.x < -20){
-			position.x = 800;
-			translation.mat[0][2] = 800;
+			position.x = 400;
+			translation.mat[0][2] = 400;
 		}
-		if (position.x > 820){
+		if (position.x > 420){
 			position.x = 0;
 			translation.mat[0][2] = 0;
 		}
 		if (position.y < -20){
-			position.y = 800;
-			translation.mat[1][2] = 800;
+			position.y = 400;
+			translation.mat[1][2] = 400;
 		}
-		if (position.y  > 820){
+		if (position.y  > 420){
 			position.y = 0;
 			translation.mat[1][2] = 0;
 		}
 	
-	}
+	//}
 }
 
 
