@@ -97,6 +97,7 @@
     <ClCompile Include="Asteroids\Shape.cpp" />
     <ClCompile Include="Asteroids\SpaceShip.cpp" />
     <ClCompile Include="Asteroids\Turret.cpp" />
+    <ClCompile Include="Breakout\BreakoutManager.cpp" />
     <ClCompile Include="Breakout\Ball.cpp" />
     <ClCompile Include="Breakout\Brick.cpp" />
     <ClCompile Include="Breakout\Paddle.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="Asteroids\Shape.h" />
     <ClInclude Include="Asteroids\SpaceShip.h" />
     <ClInclude Include="Asteroids\Turret.h" />
+    <ClInclude Include="Breakout\BreakoutManager.h" />
     <ClInclude Include="Breakout\Ball.h" />
     <ClInclude Include="Breakout\Brick.h" />
     <ClInclude Include="Breakout\Paddle.h" />

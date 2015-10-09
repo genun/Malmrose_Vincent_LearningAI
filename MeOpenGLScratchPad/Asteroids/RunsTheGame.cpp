@@ -104,24 +104,6 @@ void RunTheGame::MeDrawFn(Graphics& graphics){
 	graphics.SetColor(RGB(255, 255, 255));
 }
 
-void RunTheGame::TitleUpdate(float dt){
-	dt;
-	if(Core::Input::IsPressed('P')){
-		ScreenType = 1;
-	}
-}
-
-void RunTheGame::TitleDraw(Graphics& g){
-	g.SetColor(RGB(255, 150, 75));
-	g.DrawString(20, 10, "Use WASD to navigate the ship and Left click to fire a Missile, Right click to fire the flamethrower");
-	g.SetColor(RGB(255, 150, 75));
-	g.DrawString(20, 25, "Use 1, 2, and 3 to alternate between warp, bounce, and collision");
-	g.SetColor(RGB(255, 150, 75));
-	g.DrawString(20, 40, "Press p to start the game");
-	g.DrawString(20, 65, "You win by killing 21 enemies");
-	g.SetColor(RGB(255,255,255));
-}
-
 void RunTheGame::MainUpdate(float dt){
 	meShip.update(dt, drawBorder, width, height);
 	time = time = timer.interval();
@@ -247,14 +229,36 @@ void RunTheGame::MainDraw(Graphics& g){
 	*/
 	g.SetColor( RGB(255, 255, 255));
 	
-	g.DrawString(20, 25, "FPS");
+	g.DrawString(15, 25, "Score: ");
+	DrawValue(g, 55, 25, score);
+
+	//g.DrawString(20, 25, "FPS");
 	timer.stopTimer();
-	DrawValue(g, 55, 25, (1 / timer.getElapsedTime()));
+	//DrawValue(g, 55, 25, (1 / timer.getElapsedTime()));
 	timer.startTimer();
 	time = timer.interval();
 	profile.addEntry(time);
 
 
+}
+
+#pragma region Title and end screen code
+void RunTheGame::TitleUpdate(float dt){
+	dt;
+	if (Core::Input::IsPressed('P')){
+		ScreenType = 1;
+	}
+}
+
+void RunTheGame::TitleDraw(Graphics& g){
+	g.SetColor(RGB(255, 150, 75));
+	g.DrawString(20, 10, "Use WASD to navigate the ship and Left click to fire a Missile, Right click to fire the flamethrower");
+	g.SetColor(RGB(255, 150, 75));
+	g.DrawString(20, 25, "Use 1, 2, and 3 to alternate between warp, bounce, and collision");
+	g.SetColor(RGB(255, 150, 75));
+	g.DrawString(20, 40, "Press p to start the game");
+	g.DrawString(20, 65, "You win by killing 21 enemies");
+	g.SetColor(RGB(255, 255, 255));
 }
 
 void RunTheGame::EndUpdate(float dt){
@@ -282,4 +286,4 @@ void RunTheGame::EndDraw(Graphics& g){
 
 
 }
-
+#pragma endregion

@@ -14,7 +14,10 @@ public:
 	void Update();
 	void Init(glm::vec3 position, glm::vec3 velocity);
 	void Bounce();
-	void Collide(glm::vec3 OtherPos, glm::vec3 width, glm::vec3 height, Renderable ballImage);
+	void Collide(glm::vec3 OtherPos, glm::vec3 width, 
+		glm::vec3 height, Renderable ballImage);
+	void CheckWallCollision();
+	void CheckOtherCollision();
 
 	Ball(void);
 	~Ball(void);

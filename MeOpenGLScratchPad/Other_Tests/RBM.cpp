@@ -155,16 +155,22 @@ void RBM::test_rbm() {
 	srand(0);
 
 	double learning_rate = 0.1;
-	int training_epochs = 1000;
+	int training_epochs = 50000;
 	int k = 1;
 
 	int train_N = 6;
 	int test_N = 2;
 	int n_visible = 6;
-	int n_hidden = 3;
+	int n_hidden = 2;
 
 	// training data
 	int train_X[6][6] = {
+		//{ 1, 1, 1, 0, 0, 1 },
+		//{ 0, 0, 0, 0, 0, 0 },
+		//{ 0, 0, 0, 0, 0, 0 },
+		//{ 0, 0, 0, 0, 0, 0 },
+		//{ 0, 0, 0, 0, 0, 0 },
+		//{ 0, 0, 0, 0, 0, 0 }
 		{ 1, 1, 1, 0, 0, 0 },
 		{ 1, 0, 1, 0, 0, 0 },
 		{ 1, 1, 1, 0, 0, 0 },
@@ -186,10 +192,11 @@ void RBM::test_rbm() {
 
 	// test data
 	int test_X[2][6] = {
-		{ 1, 1, 0, 0, 0, 0 },
-		{ 0, 0, 0, 1, 1, 0 }
+		{ 0, 1, 0, 0, 0, 0 },
+		{ 1, 0, 1, 0, 1, 0 }//,
+		//{ 0, 0, 0, 1, 1, 1 }
 	};
-	double reconstructed_X[2][6];
+	double reconstructed_X[3][6];
 
 
 	// test

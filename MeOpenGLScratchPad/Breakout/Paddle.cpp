@@ -10,7 +10,7 @@ Paddle::~Paddle(void)
 {
 }
 
-void Paddle::Update(){
+void Paddle::Update(/*inputType input*/){
 
 }
 

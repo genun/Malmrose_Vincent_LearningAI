@@ -16,16 +16,28 @@ void Ball::Init(glm::vec3 position, glm::vec3 velocity){
 }
 
 void Ball::Update(){
-	glm::vec3 newPos = pos + vel * (1.0f / 30.0f);
-	if (newPos.x > 4.5 || newPos.x < -4.5){
-		vel.x = -vel.x;
-	}
-	if( newPos.y < -4 || newPos.y > 3.2){
-		vel.y = -vel.y;
-	}
+	CheckWallCollision();
+	CheckOtherCollision();
+
+	//No DT currently. Assuming 30fps.
 	pos = pos + vel * (1.0f / 30.0f);
 
+	//Update the renderable.
 	img->whereMatrix = glm::translate(pos) * glm::scale(glm::vec3(0.25f));
+}
+
+void Ball::CheckOtherCollision(){
+
+}
+
+void Ball::CheckWallCollision(){
+	glm::vec3 CheckCollisionPosition = pos + vel * (1.0f / 30.0f);
+	if (CheckCollisionPosition.x > 4.5 || CheckCollisionPosition.x < -4.5){
+		vel.x = -vel.x;
+	}
+	if (CheckCollisionPosition.y < -4 || CheckCollisionPosition.y > 3.2){
+		vel.y = -vel.y;
+	}
 }
 
 void Ball::Bounce(){

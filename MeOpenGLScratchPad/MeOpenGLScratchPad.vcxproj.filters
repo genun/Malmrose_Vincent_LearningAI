@@ -36,6 +36,7 @@
     <ClCompile Include="Asteroids\Turret.cpp" />
     <ClCompile Include="Asteroids\AsterMain.cpp" />
     <ClCompile Include="Other_Tests\RBM.cpp" />
+    <ClCompile Include="Breakout\BreakoutManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rendering\Renderer.h" />
@@ -83,6 +84,7 @@
     <ClInclude Include="Asteroids\AsterMain.h" />
     <ClInclude Include="Other_Tests\RBM.h" />
     <ClInclude Include="Other_Tests\Utils.h" />
+    <ClInclude Include="Breakout\BreakoutManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugTools\Shapes\VertexShader.glsl" />

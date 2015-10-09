@@ -2,15 +2,15 @@
 #include "Vector2d.h"
 
 void Turret::init(Matrix3 mat){
-	Points[0] = Vector2d(-6, -6);
-	Points[1] = Vector2d(-6, 6);
-	Points[2] = Vector2d(6, 6);
-	Points[3] = Vector2d(6, -6);
-	Points[4] = Vector2d(3, -6);
-	Points[5] = Vector2d(3, - 12);
-	Points[6] = Vector2d(-3, -12);
-	Points[7] = Vector2d(-3, -6);
-	Points[8] = Vector2d(-6, -6);
+	//Points[0] = Vector2d(-6, -6);
+	//Points[1] = Vector2d(-6, 6);
+	//Points[2] = Vector2d(6, 6);
+	//Points[3] = Vector2d(6, -6);
+	//Points[4] = Vector2d(3, -6);
+	//Points[5] = Vector2d(3, - 12);
+	//Points[6] = Vector2d(-3, -12);
+	//Points[7] = Vector2d(-3, -6);
+	//Points[8] = Vector2d(-6, -6);
 
 	transformation = mat;
 };

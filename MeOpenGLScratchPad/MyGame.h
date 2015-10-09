@@ -9,6 +9,7 @@
 #include <Breakout\Ball.h>
 #include <Breakout\Paddle.h>
 #include <Breakout\Brick.h>
+#include <Breakout\BreakoutManager.h>
 
 class PassInfo;
 class Renderable;
@@ -53,13 +54,9 @@ class MyGame: public QObject{
 	glm::vec3 domColor;
 	glm::vec3 light;
 	
-	static const int brickLineWidth = 8;
-	static const int brickLineHeight = 4;
-	Ball* ball;
-	Brick* bricks[brickLineWidth][brickLineHeight];
-	Paddle* paddle;
 	bool isBreakout = false;
-	bool isAsteroids = false;
+
+	BreakoutManager breakManage;
 
 	void generateGeometries();
 	Renderable* makeBrick(glm::mat4 translate);
@@ -69,7 +66,6 @@ class MyGame: public QObject{
 	void positionBall();
 	void positionPaddle();
 	void Breakout();
-	void Asteroids();
 
 	private slots:
 		void newFrame();

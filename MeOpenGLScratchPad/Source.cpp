@@ -6,12 +6,14 @@
 #include "Asteroids\AsterMain.h"
 #include "Other_Tests\RBM.h"
 
-bool Test_Asteroids = true;
-bool Testing_Others = true;
+bool Test_Asteroids = false;
+bool Testing_Others = false;
 
 void main(int argumentCount, char* argumentVector[]){
 	if (Testing_Others){
-		RBM* rbm = new RBM(10, 5, 5, NULL, NULL, NULL);
+		//Not actually helpful, unless I call the functions myself
+		RBM* rbm = new RBM(0, 0, 0, NULL, NULL, NULL);
+		//Seems to print an array that resembles the test data
 		rbm->test_rbm();
 	}
 	else if (Test_Asteroids){

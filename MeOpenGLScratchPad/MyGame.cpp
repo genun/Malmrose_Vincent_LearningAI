@@ -51,9 +51,8 @@ bool MyGame::initialize(){
 
 	renderStuff();
 
-	//Run Breakout or Asteroids
+	//Run Breakout, because asteroids is in source
 	Breakout();
-	//Asteroids();
 	
 
 	connect(&timer, SIGNAL(timeout()), this, SLOT(newFrame()));
@@ -73,13 +72,10 @@ bool MyGame::shutdown(){
 }
 #pragma endregion
 
-void MyGame::Asteroids(){
-
-}
 
 void MyGame::Breakout(){
-	ball = new Ball();
-	ball->Init(vec3(-2.0f, -1.0f, -6.0f), vec3(1.0f, 2.0f, 0.0f));
+	breakManage.ball = new Ball();
+	breakManage.ball->Init(vec3(-2.0f, -1.0f, -6.0f), vec3(1.0f, 2.0f, 0.0f));
 
 	positionBricks();
 	positionPaddle();
@@ -99,7 +95,9 @@ void MyGame::newFrame(){
 	else{
 
 	}
-	ball->Update();
+
+	breakManage.Update(/*inputType::LEFT*/);
+	//ball->Update();
 }
 
 #pragma region Renderer initializtion
@@ -111,11 +109,11 @@ void MyGame::renderStuff(){
 }
 
 void MyGame::positionBricks(){
-	for (int i = 0; i < brickLineHeight; i++){
-		for (int j = 0; j < brickLineWidth; j++){
-			bricks[j][i] = new Brick();
+	for (int i = 0; i < breakManage.brickLineHeight; i++){
+		for (int j = 0; j < breakManage.brickLineWidth; j++){
+			breakManage.bricks[j][i] = new Brick();
 			vec3 brickPosition = vec3(-3.75 + j * 1.05f, 2.75 + i * -0.75f, 2 - 8.0f);
-			bricks[j][i]->Init(brickPosition, makeBrick(glm::translate(brickPosition) 
+			breakManage.bricks[j][i]->Init(brickPosition, makeBrick(glm::translate(brickPosition)
 				*glm::rotate(180.0f, vec3(0.0f, 1.0f, 0.0f)) 
 				*glm::scale(vec3(0.40f, 0.20f, 0.10f))));
 		}
@@ -124,11 +122,11 @@ void MyGame::positionBricks(){
 
 void MyGame::positionPaddle(){
 	vec3 paddlePos = vec3(-2.0f, -3.0f, -6.0f);
-	paddle->Init(paddlePos, 1.0f, makeBrick(glm::translate(paddlePos) * glm::scale(vec3(1.5f, 0.20f, 0.10f))));
+	//breakManage.paddle->Init(paddlePos, 1.0f, makeBrick(glm::translate(paddlePos) * glm::scale(vec3(1.5f, 0.20f, 0.10f))));
 }
 
 void MyGame::positionBall(){
-	ball->img = makeBall(glm::translate(ball->pos) * glm::scale(vec3(0.25f)));
+	breakManage.ball->img = makeBall(glm::translate(breakManage.ball->pos) * glm::scale(vec3(0.25f)));
 }
 
 void MyGame::generateGeometries(){
