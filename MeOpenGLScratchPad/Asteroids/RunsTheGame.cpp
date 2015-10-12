@@ -186,8 +186,6 @@ void RunTheGame::MainDraw(Graphics& g){
 
 	e.draw(g);
 
-	
-
 	//orbit.draw(g, 1, 3, Vector2d(650, 650));
 	//time = timer.interval();
 	//profile.addEntry(time);

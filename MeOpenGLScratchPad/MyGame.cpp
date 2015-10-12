@@ -72,10 +72,12 @@ bool MyGame::shutdown(){
 }
 #pragma endregion
 
-
 void MyGame::Breakout(){
 	breakManage.ball = new Ball();
-	breakManage.ball->Init(vec3(-2.0f, -1.0f, -6.0f), vec3(1.0f, 2.0f, 0.0f));
+	vec3 scaleBallSpeed = vec3(1.0f);
+	vec3 ballVelocity = vec3(-1.0f, +2.0f, 0.0f);
+	breakManage.ball->Init(vec3(-2.0f, -1.0f, -6.0f), ballVelocity * scaleBallSpeed, 1.0f);
+	breakManage.paddle = new Paddle();
 
 	positionBricks();
 	positionPaddle();
@@ -90,13 +92,16 @@ void MyGame::newFrame(){
 	camPos = camera.getPosition();
 	renderer.draw(camera.getWorldtoViewMatrix());
 	if (isBreakout){
-
+		Paddle::inputType paddleInput = Paddle::inputType::NONE;
+		if (GetAsyncKeyState('D'))
+			paddleInput = Paddle::inputType::LEFT;
+		if (GetAsyncKeyState('A'))
+			paddleInput = Paddle::inputType::RIGHT;
+		breakManage.Update(paddleInput);
 	}
 	else{
 
 	}
-
-	breakManage.Update(/*inputType::LEFT*/);
 	//ball->Update();
 }
 
@@ -109,20 +114,25 @@ void MyGame::renderStuff(){
 }
 
 void MyGame::positionBricks(){
+	float width = 2.0 * 0.09f;
+	float height = 2.0 * 0.013f;
 	for (int i = 0; i < breakManage.brickLineHeight; i++){
 		for (int j = 0; j < breakManage.brickLineWidth; j++){
 			breakManage.bricks[j][i] = new Brick();
 			vec3 brickPosition = vec3(-3.75 + j * 1.05f, 2.75 + i * -0.75f, 2 - 8.0f);
-			breakManage.bricks[j][i]->Init(brickPosition, makeBrick(glm::translate(brickPosition)
-				*glm::rotate(180.0f, vec3(0.0f, 1.0f, 0.0f)) 
-				*glm::scale(vec3(0.40f, 0.20f, 0.10f))));
+			Renderable* hold = makeBrick(glm::translate(brickPosition)*glm::scale(vec3(0.40f, 0.20f, 0.10f)));
+			/*glm::rotate(180.0f, vec3(0.0f, 1.0f, 0.0f))*/
+			breakManage.bricks[j][i]->Init(brickPosition, hold, width, height);
 		}
 	}
 }
 
 void MyGame::positionPaddle(){
+	float width = 1.35f;
+	float height = 0.01f;
 	vec3 paddlePos = vec3(-2.0f, -3.0f, -6.0f);
-	//breakManage.paddle->Init(paddlePos, 1.0f, makeBrick(glm::translate(paddlePos) * glm::scale(vec3(1.5f, 0.20f, 0.10f))));
+	mat4 scale = glm::scale(vec3(1.5f, 0.20f, 0.10f));
+	breakManage.paddle->Init(paddlePos, 1.0f, makeBrick(glm::translate(paddlePos) * scale), scale, width, height);
 }
 
 void MyGame::positionBall(){
@@ -191,8 +201,8 @@ Renderable* MyGame::makeBall(mat4 translate){
 
 #pragma region Camera updates
 void MyGame::updateCamera(){
-	updateCameraFromMouse();
-	updateCameraFromKeyboard();
+	//updateCameraFromMouse();
+	//updateCameraFromKeyboard();
 }
 
 void MyGame::updateCameraFromMouse(){
@@ -204,7 +214,6 @@ void MyGame::updateCameraFromMouse(){
 }
 
 void MyGame::updateCameraFromKeyboard(){
-
 	if(GetAsyncKeyState('W'))
 		camera.transForward(true);
 	if(GetAsyncKeyState('S'))

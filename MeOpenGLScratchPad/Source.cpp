@@ -6,7 +6,7 @@
 #include "Asteroids\AsterMain.h"
 #include "Other_Tests\RBM.h"
 
-bool Test_Asteroids = false;
+bool Test_Asteroids = true;
 bool Testing_Others = false;
 
 void main(int argumentCount, char* argumentVector[]){
