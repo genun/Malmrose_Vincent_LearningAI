@@ -15,6 +15,7 @@
 #include "profiler.h"
 #include "enemyManager.h"
 #include "MemTrack.h"
+#include "AI\DeepLearner.h"
 using Core::Graphics;
 
 struct RunTheGame{
@@ -39,6 +40,8 @@ struct RunTheGame{
 	CStopWatch timer;
 	profiler profile;
 	enemyManager e;
+
+	DeepLearner ai;
 
 	bool MeUpdateFn(float dt);
 	void MeDrawFn  (Graphics& graphics);

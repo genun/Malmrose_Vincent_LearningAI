@@ -55,6 +55,8 @@ class MyGame: public QObject{
 	glm::vec3 light;
 	
 	bool isBreakout = false;
+	bool* cont;
+	bool win;
 
 	BreakoutManager breakManage;
 
@@ -71,7 +73,7 @@ class MyGame: public QObject{
 		void newFrame();
 
 public:
-	bool initialize();
+	bool initialize(bool* cont);
 	void gameLoop();
 	bool shutdown();
 	void rayTriangleIntersect(glm::vec3 rayOrigin, glm::vec3 ray_direciton, MyShapeData shape, float* minIntersection, glm::mat4 whereMat);

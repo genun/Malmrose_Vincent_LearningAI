@@ -30,14 +30,14 @@ void DebugMenu::update(){
 	}
 
 	if(GetAsyncKeyState(VK_TAB) && time < 0 ){
-		if(layout->parentWidget()->isHidden()){
-			layout->parentWidget()->show();
-			time = 1;
-		}
-		else{
-			layout->parentWidget()->hide();
-			time = 1;
-		}
+		//if(layout->parentWidget()->isHidden()){
+		//	layout->parentWidget()->show();
+		//	time = 1;
+		//}
+		//else{
+		//	layout->parentWidget()->hide();
+		//	time = 1;
+		//}
 	}
 	
 	if(time > 0)

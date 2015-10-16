@@ -24,9 +24,11 @@ using glm::vec3;
 using glm::vec4;
 
 #pragma region Initialization
-bool MyGame::initialize(){
+bool MyGame::initialize(bool* gameCont){
 	if (!renderer.initialize())
 		return false;
+
+	cont = gameCont;
 
 	window = new QWidget();
 	masterLayout = new QVBoxLayout();
@@ -35,8 +37,9 @@ bool MyGame::initialize(){
 
 	if (!debugMenu.initialize(debugLayout))
 		return false;
-	if (!debugShape.initialize())
-		return false;
+	debugShape.initialize();
+	//if (!debugShape.initialize())
+	//	return false;
 
 	//debugShape.init();
 
@@ -53,7 +56,6 @@ bool MyGame::initialize(){
 
 	//Run Breakout, because asteroids is in source
 	Breakout();
-	
 
 	connect(&timer, SIGNAL(timeout()), this, SLOT(newFrame()));
 		
@@ -68,11 +70,13 @@ bool MyGame::shutdown(){
 	bool ret = true;
 	ret &= renderer.shutdown();
 	timer.stop();
+	breakManage.~BreakoutManager();
 	return ret;
 }
 #pragma endregion
 
 void MyGame::Breakout(){
+	win = false;
 	breakManage.ball = new Ball();
 	vec3 scaleBallSpeed = vec3(1.0f);
 	vec3 ballVelocity = vec3(-1.0f, +2.0f, 0.0f);
@@ -83,6 +87,8 @@ void MyGame::Breakout(){
 	positionPaddle();
 	positionBall();
 	isBreakout = true;
+	breakManage.cont = cont;
+	breakManage.win = &win;
 }
 
 void MyGame::newFrame(){
@@ -92,14 +98,26 @@ void MyGame::newFrame(){
 	camPos = camera.getPosition();
 	renderer.draw(camera.getWorldtoViewMatrix());
 	if (isBreakout){
-		Paddle::inputType paddleInput = Paddle::inputType::NONE;
-		if (GetAsyncKeyState('D'))
-			paddleInput = Paddle::inputType::LEFT;
-		if (GetAsyncKeyState('A'))
-			paddleInput = Paddle::inputType::RIGHT;
-		breakManage.Update(paddleInput);
+		breakManage.Update();
 	}
 	else{
+
+	}
+
+	if (!*cont) {
+		*cont = true;
+		//QApplication::quit();
+		QCoreApplication::exit(0);
+	}
+
+	if (GetAsyncKeyState(VK_ESCAPE)){
+		*cont = false;
+		QCoreApplication::exit(0);
+	}
+
+	if (win){
+		*cont = true;
+		QCoreApplication::exit(0);
 
 	}
 	//ball->Update();

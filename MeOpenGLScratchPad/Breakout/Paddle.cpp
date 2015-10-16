@@ -13,12 +13,15 @@ Paddle::~Paddle(void)
 }
 
 void Paddle::Update(inputType input){
-	if (input == inputType::LEFT){
-		pos = pos + glm::vec3(speed, 0, 0) * 0.1f;
-	}
-	else if (input == inputType::RIGHT){
+	float fLeftMax = -3.25f;
+	float fRightMax = 3.0f;
+	if (input == inputType::LEFT && pos.x > fLeftMax){
 		pos = pos - glm::vec3(speed, 0, 0) * 0.1f;
 	}
+	else if (input == inputType::RIGHT && pos.x < fRightMax){
+		pos = pos + glm::vec3(speed, 0, 0) * 0.1f;
+	}
+
 	img->whereMatrix = glm::translate(pos) * scale;
 }
 

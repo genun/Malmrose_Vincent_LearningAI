@@ -31,6 +31,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 7.5.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -52,13 +53,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Engine;$(SolutionDir)\Core\include;$(ProjectDir);$(SourceDir)..\Middleware\Qt\include;$(SourceDir)..\Middleware\glew\include;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\include;$(SolutionDir)..\Core\include;$(SolutionDir)\Testing_Others;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Engine;$(SolutionDir)\Core\include;$(ProjectDir);$(SourceDir)..\Middleware\Qt\include;$(SourceDir)..\Middleware\glew\include;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\include;$(SolutionDir)..\Core\include;$(SolutionDir)\Testing_Others;$(CUDA_INC_PATH);$(CUDA_PATH);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)\Core\lib;$(SolutionDir)$(Configuration)\;$(SourceDir)..\Middleware\glew\lib;$(SourceDir)..\Middleware\Qt\lib;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;Core.lib;QtCored4.lib;QtGuid4.lib;QtOpenGLd4.lib;glew32d.lib;opengl32.lib;NeumontTools.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)\Core\lib;$(SolutionDir)$(Configuration)\;$(SourceDir)..\Middleware\glew\lib;$(SourceDir)..\Middleware\Qt\lib;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\lib;$(CudaToolkitLibDir);$(CUDA_PATH)\lib\x64;$(CUDA_PATH_V7_5);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Engine.lib;Core.lib;QtCored4.lib;QtGuid4.lib;QtOpenGLd4.lib;glew32d.lib;opengl32.lib;NeumontTools.lib;cudart.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/fs %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -106,6 +107,9 @@
     <ClCompile Include="DebugTools\Menu\DebugMenu.cpp" />
     <ClCompile Include="DebugTools\Menu\Infos\CheckBoxInfo.cpp" />
     <ClCompile Include="DebugTools\Menu\Infos\SliderInfo.cpp" />
+    <CudaCompile Include="AI\DeepLearner.cu">
+      <FileType>CppCode</FileType>
+    </CudaCompile>
     <ClCompile Include="IO\FileIO.cpp" />
     <ClCompile Include="MyGame.cpp" />
     <ClCompile Include="MyGame_moc.cpp" />
@@ -115,7 +119,9 @@
     <ClCompile Include="Other_Tests\RBM.cpp" />
     <ClCompile Include="Rendering\Renderer.cpp" />
     <ClCompile Include="Shapes\ShapeMaker.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <CudaCompile Include="Source.cu">
+      <FileType>CppCode</FileType>
+    </CudaCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asteroids\AsterMain.h" />
@@ -145,6 +151,7 @@
     <ClInclude Include="DebugTools\Menu\Infos\CheckBoxInfo.h" />
     <ClInclude Include="DebugTools\Menu\Infos\WatchInfo.h" />
     <ClInclude Include="DebugTools\Menu\Infos\SliderInfo.h" />
+    <ClInclude Include="AI\DeepLearner.h" />
     <ClInclude Include="MyGame.h" />
     <ClInclude Include="Other_Tests\RBM.h" />
     <ClInclude Include="Other_Tests\Utils.h" />
@@ -191,5 +198,6 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 7.5.targets" />
   </ImportGroup>
 </Project>

@@ -1,4 +1,5 @@
 #include "RunsTheGame.h"
+#include <vector>
 
 RunTheGame::RunTheGame(){
 	init();
@@ -43,6 +44,8 @@ void RunTheGame::init(){
 	meShip.rotation = Matrix3();
 	meShip.velocity = Vector2d();
 	win = false;
+
+	ai.Initialize(0, 0, 0, 5, 0.1);
 }
 
 bool RunTheGame::MeUpdateFn(float dt){
@@ -110,24 +113,56 @@ void RunTheGame::MainUpdate(float dt){
 	profile.addEntry(time);
 
 	e.update(dt, myBullet, effect, meShip, score, hp);
-	
-	if(Core::Input::IsPressed(Core::Input::KEY_RIGHT) || Core::Input::IsPressed('D')){	
+#pragma region AI input
+	//Screengrab
+	std::vector<float*> emptyGrab;
+	int input = ai.GetInput(emptyGrab);
+
+	if(input == 0){	
 		meShip.rot += 0.05f;
 		meShip.rotation.Rotation(meShip.rot);
 	}
 	
-	if(Core::Input::IsPressed(Core::Input::KEY_LEFT) || Core::Input::IsPressed('A')){
+	if(input == 1){
 		meShip.rot -= 0.05f;
 		meShip.rotation.Rotation(meShip.rot);
 	}
 	
-	if(Core::Input::IsPressed(Core::Input::KEY_DOWN) || Core::Input::IsPressed('S')){
+	if(input == 2){
 		meShip.velocity = meShip.velocity + (meShip.rotation * meShip.Speed);
 	}
 	
-	if(Core::Input::IsPressed(Core::Input::KEY_UP) || Core::Input::IsPressed('W')){
+	if(input == 3){
 		meShip.velocity = meShip.velocity + (meShip.rotation * (-1 * meShip.Speed));
 	}
+	if (input == 4){
+		myBullet.init(Vector2d(turret.translation.mat[0][2], turret.translation.mat[1][2]), turret.rotation, meShip.velocity);
+	}
+
+#pragma endregion
+	
+#pragma region Keyboard Input
+	//if(Core::Input::IsPressed(Core::Input::KEY_RIGHT) || Core::Input::IsPressed('D')){	
+	//	meShip.rot += 0.05f;
+	//	meShip.rotation.Rotation(meShip.rot);
+	//}
+	//
+	//if(Core::Input::IsPressed(Core::Input::KEY_LEFT) || Core::Input::IsPressed('A')){
+	//	meShip.rot -= 0.05f;
+	//	meShip.rotation.Rotation(meShip.rot);
+	//}
+	//
+	//if(Core::Input::IsPressed(Core::Input::KEY_DOWN) || Core::Input::IsPressed('S')){
+	//	meShip.velocity = meShip.velocity + (meShip.rotation * meShip.Speed);
+	//}
+	//
+	//if(Core::Input::IsPressed(Core::Input::KEY_UP) || Core::Input::IsPressed('W')){
+	//	meShip.velocity = meShip.velocity + (meShip.rotation * (-1 * meShip.Speed));
+	//}
+	//if (Core::Input::IsPressed(Core::Input::BUTTON_LEFT)){
+	//	myBullet.init(Vector2d(turret.translation.mat[0][2], turret.translation.mat[1][2]), turret.rotation, meShip.velocity);
+	//}
+#pragma endregion
 
 	//FLAMETHROWER WOOOO
 	//if(Core::Input::IsPressed(Core::Input::BUTTON_RIGHT)){
@@ -155,9 +190,6 @@ void RunTheGame::MainUpdate(float dt){
 	time = timer.interval();
 	profile.addEntry(time);
 	
-	if(Core::Input::IsPressed(Core::Input::BUTTON_LEFT)){
-		myBullet.init(Vector2d(turret.translation.mat[0][2], turret.translation.mat[1][2]), turret.rotation, meShip.velocity);
-	}
 	time = timer.interval();
 	profile.addEntry(time);
 

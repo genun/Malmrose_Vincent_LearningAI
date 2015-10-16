@@ -19,8 +19,8 @@ public:
 	void Collide(glm::vec3 OtherPos, float width, 
 		float height);
 	void CheckWallCollision();
-	void CheckOtherCollision();
 	void KeyboardInput();
+	void PaddleCollide();
 
 	Ball(void);
 	~Ball(void);

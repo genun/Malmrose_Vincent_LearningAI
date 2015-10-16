@@ -19,7 +19,6 @@ void Ball::Init(glm::vec3 position, glm::vec3 velocity, float radius){
 
 void Ball::Update(){
 	CheckWallCollision();
-	CheckOtherCollision();
 	//KeyboardInput();
 
 	//No DT currently. Assuming 30fps.
@@ -42,10 +41,6 @@ void Ball::KeyboardInput(){
 		vel = glm::vec3(0.0f);
 }
 
-void Ball::CheckOtherCollision(){
-
-}
-
 void Ball::CheckWallCollision(){
 	glm::vec3 CheckCollisionPosition = pos + vel * (1.0f / 30.0f);
 	if (CheckCollisionPosition.x > 4.5 || CheckCollisionPosition.x < -4.5){
@@ -62,5 +57,18 @@ void Ball::Bounce(){
 
 void Ball::Collide(glm::vec3 OtherPos, float width, float height){
 	//std::cout << "Collided" << std::endl;
+	float percentXLeft = (pos.x - rad)/ (OtherPos.x - width);
+	float percentXRight = (pos.x + rad) / (OtherPos.x - width);;
+	float percentYTop = (pos.y - rad) / (OtherPos.y - height);;
+	float percentYBot = (pos.y + rad) / (OtherPos.y - height);;
+
+	float xPercent = (percentXLeft > percentXRight) ? percentXLeft : percentXRight;
+	float yPercent = (percentYTop > percentYBot ) ? percentYTop : percentYBot;
+
+	if (xPercent > yPercent) vel.x = vel.x * -1;
+	else vel.y = vel.y * -1;
 }
 
+void Ball::PaddleCollide(){
+	vel.y = vel.y * -1;
+}
