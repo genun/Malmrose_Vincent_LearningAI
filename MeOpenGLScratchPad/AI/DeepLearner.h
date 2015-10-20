@@ -19,9 +19,13 @@ class DeepLearner
 	int* height;
 	int* score;
 	float lr;
+	float f_RandomChance;
 
-	//__global__ void CalcInput(int* d_Input, int* d_numInput);
+	void GetScreen();
+
 public:
+
+
 	int GetInput(std::vector<float*> screengrab);
 	void Initialize(int* score, int* widthPoint, int* heightPoint, int numInput, float learningRate, type algoType = type::DEEP);
 	void GameOver(bool isWin);

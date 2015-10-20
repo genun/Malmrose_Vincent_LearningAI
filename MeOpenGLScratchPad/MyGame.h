@@ -53,6 +53,9 @@ class MyGame: public QObject{
 	glm::vec3 camPos;
 	glm::vec3 domColor;
 	glm::vec3 light;
+
+	int width = 800;
+	int height = 600;
 	
 	bool isBreakout = false;
 	bool* cont;

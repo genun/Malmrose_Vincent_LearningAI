@@ -7,7 +7,7 @@
 
 Renderer* Renderer::instance = 0;
 
-//GEOMETRIES
+#pragma region GEOMETRIES
 Geometry* Renderer::findAvailableGeometry(){
 	for(unsigned int i = 0; i < MAX_GEOMETRY; i++){
 		Geometry* g = geometries + i;
@@ -58,8 +58,9 @@ Geometry* Renderer::addGeometry(void* verts, GLuint vertexDataSize,
 	ret->vertexLayoutInfo = layoutInfo;
 	return ret;
 }
+#pragma endregion
 
-//SHADERS
+#pragma region Shaders
 ShaderInfo* Renderer::getAvailableShader(){
 	ShaderInfo* ret = findAvailableShader();
 
@@ -155,9 +156,9 @@ void Renderer::checkCompileStatuts(GLuint shaderID){
 	delete [] buffer;
 	exit(1);
 }
+#pragma endregion
 
-
-//BUFFERS
+#pragma region BUFFERS
 BufferInfo* Renderer::getAvailableBuffer(GLuint neededSize){
 
 	//Find the buffer info with enough room
@@ -203,9 +204,9 @@ BufferInfo* Renderer::findUnsuedBufferInfo(){
 	exit(1);
 	return 0;
 }
+#pragma endregion
 
-
-//RENDERABLES
+#pragma region RENDERABLES
 Renderable* Renderer::addRenderable(Geometry* geometry, ShaderInfo* shader, 
 									UniformInfo* uniform, void*  uniformData[], 
 									TextureInfo* texture, glm::mat4 whereMatrix,
@@ -273,7 +274,7 @@ Renderable* Renderer::setRenderableVisibility(
 	render->isVisible = visibility;
 	return render;
 }
-
+#pragma endregion
 
 //TEXTURE INFO
 TextureInfo* Renderer::addTexture(const char* texName, const char* texType, ShaderInfo* shader){
@@ -397,6 +398,8 @@ bool Renderer::initialize(){
 void Renderer::initializeGL(){
 	glewInit();
 	glEnable(GL_DEPTH_TEST);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glPixelStorei(GL_PACK_ALIGNMENT, 1);
 	numRenderables = 0;
 	numGeometries = 0;
 	numBuffers = 0;
@@ -427,7 +430,11 @@ void Renderer::paintGL(){
 		}
 		drawRenderable(&r, cameraPosition);
 	}
-	
+	//glReadBuffer(GL_FRONT);
+	//int numPixels = width() * height();
+	//GLfloat* pixels = new GLfloat[numPixels * 3];
+	//glReadPixels(0, 0, width(), height(), GL_RGB, GL_FLOAT, pixels);
+	//qDebug() << pixels[0];
 }
 
 void Renderer::draw(glm::mat4 camera){

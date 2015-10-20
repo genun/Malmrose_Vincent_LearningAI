@@ -8,8 +8,8 @@
 class BreakoutManager
 {
 public:
-	static const int brickLineWidth = 1;
-	static const int brickLineHeight = 1;
+	static const int brickLineWidth = 8;
+	static const int brickLineHeight = 3;
 
 	DeepLearner ai;
 	Ball* ball;
@@ -26,6 +26,7 @@ public:
 	bool Collide(glm::vec3 pos, float width, float height);
 	void Fail();
 	void WinGame();
+	void init(int* width, int* height);
 
 	BreakoutManager();
 	~BreakoutManager();

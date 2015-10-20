@@ -44,7 +44,7 @@ bool MyGame::initialize(bool* gameCont){
 	//debugShape.init();
 
 	//debugWidget->setLayout(debugLayout);
-	renderer.setMinimumSize(800, 600);
+	renderer.setMinimumSize(width, height);
 
 	//masterLayout->addWidget(debugWidget);
 	masterLayout->addWidget(&renderer);
@@ -77,6 +77,7 @@ bool MyGame::shutdown(){
 
 void MyGame::Breakout(){
 	win = false;
+	breakManage.init(&width, &height);
 	breakManage.ball = new Ball();
 	vec3 scaleBallSpeed = vec3(1.0f);
 	vec3 ballVelocity = vec3(-1.0f, +2.0f, 0.0f);

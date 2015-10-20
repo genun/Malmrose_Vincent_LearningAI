@@ -1,3 +1,8 @@
+#include <GL/glew.h>
+#include <glm\glm.hpp>
+#include <gl\GL.h>
+#include <qt\qdebug.h>
+
 #include "DeepLearner.h"
 #include <random>
 #include <time.h>
@@ -7,6 +12,8 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 #include "curand.h"
+
+
 using std::vector;
 
 #pragma region Initialization
@@ -43,10 +50,12 @@ __global__ void CalcInput(int* d_Input, int* d_numInput){
 int  DeepLearner::GetInput(vector<float*> screengrab){
 	numCalls++;
 	if (numCalls > 3){
+		GetScreen();
+
 		int* d_Input = &lastInput;
-		std::cout << *d_Input << std::endl;
+		//std::cout << *d_Input << std::endl;
 		int* d_numInput = &numInput;
-		std::cout << *d_numInput << std::endl;
+		//std::cout << *d_numInput << std::endl;
 		int size = sizeof(int);
 		cudaMalloc((void**)&d_Input, size);
 		cudaMalloc((void**)&d_numInput, size);
@@ -62,6 +71,14 @@ int  DeepLearner::GetInput(vector<float*> screengrab){
 	}
 
 	return lastInput;
+}
+
+void DeepLearner::GetScreen(){
+		glReadBuffer(GL_FRONT);
+	int numPixels = *width * *height;
+	GLfloat* pixels = new GLfloat[numPixels * 3];
+	glReadPixels(0, 0, *width, *height, GL_RGB, GL_FLOAT, pixels);
+	//qDebug() << "Got a screen, mebe";
 }
 
 void DeepLearner::GameOver(bool isWin){
