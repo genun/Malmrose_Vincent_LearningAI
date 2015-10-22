@@ -45,7 +45,7 @@ void RunTheGame::init(){
 	meShip.velocity = Vector2d();
 	win = false;
 
-	ai.Initialize(0, 0, 0, 5, 0.1);
+	//ai.Initialize(0, 0, 0, 5, 0.1);
 }
 
 bool RunTheGame::MeUpdateFn(float dt){

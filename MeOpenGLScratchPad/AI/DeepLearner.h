@@ -3,6 +3,8 @@
 #include "cuda.h"
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
+#include "StateAction.h"
+#include "Asteroids\Random.h"
 
 enum type{
 	DEEP
@@ -10,14 +12,18 @@ enum type{
 
 class DeepLearner
 {
-	std::vector<std::vector<std::vector<float>>> previousScreens;
 	type algo;
-	int numCalls;
-	int lastInput;
-	int numInput;
+	Random rand;
 	int* width;
 	int* height;
 	int* score;
+	int rWidth;
+	int rHeight;
+	int numCalls;
+	int lastInput;
+	int numInput;
+
+	float* reduceScreen;
 	float lr;
 	float f_RandomChance;
 

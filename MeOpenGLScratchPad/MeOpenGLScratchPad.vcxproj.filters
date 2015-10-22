@@ -36,6 +36,7 @@
     <ClCompile Include="Asteroids\AsterMain.cpp" />
     <ClCompile Include="Other_Tests\RBM.cpp" />
     <ClCompile Include="Breakout\BreakoutManager.cpp" />
+    <ClCompile Include="StateAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rendering\Renderer.h" />
@@ -85,6 +86,7 @@
     <ClInclude Include="Other_Tests\Utils.h" />
     <ClInclude Include="Breakout\BreakoutManager.h" />
     <ClInclude Include="AI\DeepLearner.h" />
+    <ClInclude Include="StateAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugTools\Shapes\VertexShader.glsl" />
@@ -113,5 +115,6 @@
   <ItemGroup>
     <CudaCompile Include="Source.cu" />
     <CudaCompile Include="AI\DeepLearner.cu" />
+    <CudaCompile Include="AI\CudaCode\ScreenManipulation.cu" />
   </ItemGroup>
 </Project>

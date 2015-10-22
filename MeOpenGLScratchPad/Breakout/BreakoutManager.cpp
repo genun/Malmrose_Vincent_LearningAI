@@ -91,9 +91,9 @@ BreakoutManager::BreakoutManager()
 BreakoutManager::~BreakoutManager()
 {
 	score = 0;
-	//delete ball;
-	//delete paddle;
-	//delete bricks;
+	//free(ball);
+	//free(paddle);
+	//free(bricks);
 	//for (int i = 0; i < brickLineWidth; i++){
 	//	for (int j = 0; j < brickLineHeight; j++){
 	//	}

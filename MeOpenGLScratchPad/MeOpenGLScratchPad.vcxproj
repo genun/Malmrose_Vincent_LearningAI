@@ -107,6 +107,8 @@
     <ClCompile Include="DebugTools\Menu\DebugMenu.cpp" />
     <ClCompile Include="DebugTools\Menu\Infos\CheckBoxInfo.cpp" />
     <ClCompile Include="DebugTools\Menu\Infos\SliderInfo.cpp" />
+    <ClCompile Include="StateAction.cpp" />
+    <CudaCompile Include="AI\CudaCode\ScreenManipulation.cu" />
     <CudaCompile Include="AI\DeepLearner.cu">
       <FileType>CppCode</FileType>
     </CudaCompile>
@@ -171,6 +173,7 @@
     <ClInclude Include="Shapes\MyShapeData.h" />
     <ClInclude Include="Shapes\MyVertex.h" />
     <ClInclude Include="Shapes\ShapeMaker.h" />
+    <ClInclude Include="StateAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BinaryData\MyBinaryFile.bin" />
