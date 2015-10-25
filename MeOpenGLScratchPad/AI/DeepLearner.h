@@ -24,6 +24,7 @@ class DeepLearner
 	int numInput;
 
 	float* reduceScreen;
+	float* weights;
 	float lr;
 	float f_RandomChance;
 

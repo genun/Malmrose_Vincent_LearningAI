@@ -33,6 +33,10 @@ void DeepLearner::Initialize(int* scorePoint, int* widthPoint, int* heightPoint,
 	numCalls = 0;
 	lastInput = 0;
 	reduceScreen = new float[rWidth * rHeight];
+	weights = new float[50 * 50];
+	for (int i = 0; i < 50 * 50; ++i){
+		weights[i] = rand.randomFloat();
+	}
 }
 
 DeepLearner::DeepLearner()
@@ -47,14 +51,25 @@ DeepLearner::~DeepLearner()
 #pragma endregion
 
 #pragma region Cuda Code
-//This is where I get calculations, and pass the screengrab down to the neurons.
-__global__ void CalcInput(float* screen, int* d_Input, int* d_numInput){
-	//printf("Test\n");
+////This is where I get calculations, and pass the screengrab down to the neurons.
+//Original don't wanna delete yet.
+//__global__ void CalcInput(float* screen, int* d_Input, int* d_numInput){
+//	//printf("Test\n");
+//	int id = threadIdx.x + blockDim.x * blockIdx.x;
+//
+//	int intensity;
+//	intensity = (screen[80314] * 100.0f);
+//	*d_Input = intensity % *d_numInput;// *d_numInput - 1;
+//}
+
+__global__ void CalcInput(float* screen, float* weight, int* d_Votes, int* d_numInput){
 	int id = threadIdx.x + blockDim.x * blockIdx.x;
 
-	int intensity;
-	intensity = (screen[80314] * 100.0f);
-	*d_Input = intensity % *d_numInput;// *d_numInput - 1;
+	float hold = (screen[id]/* * weight[id]*/) * 100.0f;
+	//printf("Intensity: %f", screen[id]);
+	//printf("weight: %f", weight[id]);
+	//printf("Intensity + weight: %f", hold);
+	d_Votes[id] = ((int)hold) % *d_numInput;// *d_numInput - 1;
 }
 
 __global__ void GreyScreen(float* d_pixelsR, float* d_pixelsG, float* d_pixelsB,
@@ -80,28 +95,118 @@ int  DeepLearner::GetInput(vector<float*> screengrab){
 		else{
 			GetScreen();
 
-			float* d_screen = reduceScreen;
-			int* d_Input = &lastInput;
-			//std::cout << *d_Input << std::endl;
-			int* d_numInput = &numInput;
-			//std::cout << *d_numInput << std::endl;
+			//Seperate the reduce screen into 8x6 chunks.
+			//Average the intensity for those pixels.
+			float* screenBits = new float[50 * 50];
+			int bitsIndex = 0;
+
+			//Reduce the screen into a 50x50 grid of 8x6 pixels. Average the intensity to get the average brightness of that grid.
+			for (int r = 0; r < 50; r++){
+				for (int c = 0; c < 50; c++){
+					float intense = 0.0f;
+					int numPixels = 0;
+					for (int row = 0; row < 6; ++row){
+						for (int col = 0; col < 8; ++col){
+							float reduxIntense = reduceScreen[(r * 400 * 6) + (row * 400) + (c * 8 + col)];
+							intense += reduxIntense;
+							++numPixels;
+						}
+					}
+					if (intense > 0.0f){
+						//qDebug() << "Intense value: " << intense;
+					}
+					screenBits[bitsIndex] = (intense / ((float)numPixels));
+					++bitsIndex;
+				}
+			}
+
+			for (int i = 0; i < 50 * 50; ++i){
+				if (screenBits[i] > 0.0f){
+					//qDebug() << "Index: " << i << " Value: " << screenBits[i];
+				}
+			}
+
+			float* d_screen;// = screenBits;
+			float* d_weights;// = weights;
+			int* d_numInput;// = &numInput;
+			int* d_Votes;// = new int[50 * 50];
+
 			int sizeInt = sizeof(int);
-			int sizeArray = (rWidth * rHeight) * sizeof(float) / 4;
-			qDebug() << "Array size: " << sizeArray /4 << endl;
-			cudaMalloc((void**)&d_Input, sizeInt);
+			int sizeScreen = (50 * 50) *sizeof(float);
+			int sizeWeights = (50 * 50) *sizeof(int);
+
+			cudaMalloc((void**)&d_screen, sizeScreen);
+			cudaMalloc((void**)&d_weights, sizeWeights);
+			cudaMalloc((void**)&d_Votes, sizeWeights);
 			cudaMalloc((void**)&d_numInput, sizeInt);
-			cudaMalloc((void**)&d_screen, sizeArray);
+
+			cudaMemcpy(d_screen, screenBits, sizeScreen, cudaMemcpyHostToDevice);
+			cudaMemcpy(d_weights, weights, sizeWeights, cudaMemcpyHostToDevice);
 			cudaMemcpy(d_numInput, &numInput, sizeInt, cudaMemcpyHostToDevice);
-			cudaMemcpy(d_screen, reduceScreen, sizeArray, cudaMemcpyHostToDevice);
-			CalcInput <<<1, 1>>>(d_screen, d_Input, d_numInput);
-			cudaMemcpy(&lastInput, d_Input, sizeInt, cudaMemcpyDeviceToHost);
-			//std::cout << *d_Input << std::endl;
-			//std::cout << *d_numInput << std::endl;
-			cudaFree(d_Input);
+
+			CalcInput <<< 4, 625 >>>(d_screen, d_weights, d_Votes, d_numInput);
+
+			int* votes = new int[4 * 625];
+
+			cudaMemcpy(votes, d_Votes, sizeWeights, cudaMemcpyDeviceToHost);
+
+			cudaFree(d_Votes);
 			cudaFree(d_numInput);
 			cudaFree(d_screen);
+			cudaFree(d_numInput);
+
+			int* tally = new int[numInput];
+			for (int i = 0; i < numInput; ++i){
+				tally[i] = 0;
+			}
+			for (int i = 0; i < 4 * 625 - 1; ++i){
+				tally[votes[i]]++;
+				if (votes[i] > 0){
+					//qDebug() << "Vote: " << i << " " << votes[i];
+				}
+			}
+
+			int tallyCount = 0;
+			for (int i = 0; i < numInput; ++i){
+				qDebug() << "Input: " << i << " Tally: " << tally[i];
+				if (tallyCount < tally[i]){
+					lastInput = i;
+				}
+			}
+
+			qDebug();
+			qDebug();
+
+			delete[] screenBits;
+			//delete[] tally;
+			delete[] votes;
 			numCalls = 0;
-		//free(d_Input); free(d_numInput);
+
+#pragma region First CalcInput code
+			//It works, don't wanna delete
+			//float* d_screen = screenBits;
+			//int* d_Input = &lastInput;
+			////std::cout << *d_Input << std::endl;
+			//int* d_numInput = &numInput;
+			////std::cout << *d_numInput << std::endl;
+			//int sizeInt = sizeof(int);
+			//int sizeArray = (rWidth * rHeight) * sizeof(float) / 4;
+			//qDebug() << "Array size: " << sizeArray / 4 << endl;
+			//cudaMalloc((void**)&d_Input, sizeInt);
+			//cudaMalloc((void**)&d_numInput, sizeInt);
+			//cudaMalloc((void**)&d_screen, sizeArray);
+			//cudaMemcpy(d_numInput, &numInput, sizeInt, cudaMemcpyHostToDevice);
+			//cudaMemcpy(d_screen, reduceScreen, sizeArray, cudaMemcpyHostToDevice);
+			//CalcInput << <1, 1 >> >(d_screen, d_Input, d_numInput);
+			//cudaMemcpy(&lastInput, d_Input, sizeInt, cudaMemcpyDeviceToHost);
+			////std::cout << *d_Input << std::endl;
+			////std::cout << *d_numInput << std::endl;
+			//cudaFree(d_Input);
+			//cudaFree(d_numInput);
+			//cudaFree(d_screen);
+			//numCalls = 0;
+			////free(d_Input); free(d_numInput);
+#pragma endregion
 		}
 	}
 	//Store state action pairs
@@ -121,6 +226,7 @@ void DeepLearner::GetScreen(){
 	glReadPixels(0, 0, *width, *height, GL_GREEN, GL_FLOAT, pixelsG);
 	glReadPixels(0, 0, *width, *height, GL_BLUE, GL_FLOAT, pixelsB);
 	float* greyScreen = new float[numPixels];
+
 #pragma region Serial Implementation
 
 	//Greyscale the image
