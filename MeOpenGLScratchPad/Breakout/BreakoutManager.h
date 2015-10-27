@@ -26,7 +26,9 @@ public:
 	bool Collide(glm::vec3 pos, float width, float height);
 	void Fail();
 	void WinGame();
-	void init(int* width, int* height);
+	void init();
+	void setAI(DeepLearner &newAI, int* width, int* height);
+	void setAI(DeepLearner& newAI);
 
 	BreakoutManager();
 	~BreakoutManager();

@@ -32,6 +32,8 @@ void DeepLearner::Initialize(int* scorePoint, int* widthPoint, int* heightPoint,
 	srand(time(NULL));
 	numCalls = 0;
 	lastInput = 0;
+	lastScore = 0;
+
 	reduceScreen = new float[rWidth * rHeight];
 	inputWeights = new float[50 * 50];
 	for (int i = 0; i < 50 * 50; ++i){
@@ -53,6 +55,11 @@ void DeepLearner::Initialize(int* scorePoint, int* widthPoint, int* heightPoint,
 	for (int i = 0; i < 10 * numInput; ++i){
 		outputWeights[i] = rand.randomFloat();
 	}
+	
+	//400x300 is screen size, 225 frames is 15 seconds
+	screenStorageCount = 0;
+	inputStorage = new int[225];
+	FullStorage = false;
 }
 
 DeepLearner::DeepLearner() : f_RandomChance(0.1) 
@@ -62,23 +69,17 @@ DeepLearner::DeepLearner() : f_RandomChance(0.1)
 
 DeepLearner::~DeepLearner()
 {
+	//delete[] screenStorage;
+	//delete[] outputWeights;
+	//delete[] bias;
+	//delete[] firstHiddenWeights;
+	//delete[] inputWeights;
+	//delete[] reduceScreen;
 	//free(reduceScreen);
 }
 #pragma endregion
 
 #pragma region Cuda Code
-////This is where I get calculations, and pass the screengrab down to the neurons.
-//Original don't wanna delete yet.
-//__global__ void CalcInput(float* screen, int* d_Input, int* d_numInput){
-//	//printf("Test\n");
-//	int id = threadIdx.x + blockDim.x * blockIdx.x;
-//
-//	int intensity;
-//	intensity = (screen[80314] * 100.0f);
-//	*d_Input = intensity % *d_numInput;// *d_numInput - 1;
-//}
-
-//__global__ void updateInput(float* screen, float* weight, float* )
 __global__ void CalcInput(float* screen, float* weight, float* d_Votes){
 	int id = threadIdx.x + blockDim.x * blockIdx.x;
 
@@ -137,8 +138,33 @@ __global__ void GreyScreen(float* d_pixelsR, float* d_pixelsG, float* d_pixelsB,
 
 #pragma region input
 //Find what input would be best.
+void DeepLearner::StoreScreen(){
+	int screenStride = 400 * 300;
+	//int rowStride = 400;
+	//for (int x = 0; x < 400; ++x){
+	//	for (int y = 0; y < 300; ++y){
+	//		//Index violation right now, so sad :(
+	//		//screenStorage[screenStride * screenStorageCount + x * rowStride + y] = reduceScreen[x * rowStride + y];
+	//	}
+	//}
+	inputStorage[screenStorageCount] = lastInput;
+
+	++screenStorageCount;
+	if (screenStorageCount >= 225){
+		screenStorageCount = 0;
+		FullStorage = true;
+	}
+}
+
 int  DeepLearner::GetInput(vector<float*> screengrab){
 	numCalls++;
+
+	//update weights if I got higher score
+	if (lastScore < *score){
+		learn(true);
+		lastScore = *score;
+	}
+
 	if (numCalls > 3){
 #pragma region Random Input
 		if (rand.randomInRange(0, 1) < f_RandomChance){
@@ -294,34 +320,9 @@ int  DeepLearner::GetInput(vector<float*> screengrab){
 			delete[] votes;
 			numCalls = 0;
 #pragma endregion
-
-#pragma region First CalcInput code
-			//It works, don't wanna delete
-			//float* d_screen = screenBits;
-			//int* d_Input = &lastInput;
-			////std::cout << *d_Input << std::endl;
-			//int* d_numInput = &numInput;
-			////std::cout << *d_numInput << std::endl;
-			//int sizeInt = sizeof(int);
-			//int sizeArray = (rWidth * rHeight) * sizeof(float) / 4;
-			//qDebug() << "Array size: " << sizeArray / 4 << endl;
-			//cudaMalloc((void**)&d_Input, sizeInt);
-			//cudaMalloc((void**)&d_numInput, sizeInt);
-			//cudaMalloc((void**)&d_screen, sizeArray);
-			//cudaMemcpy(d_numInput, &numInput, sizeInt, cudaMemcpyHostToDevice);
-			//cudaMemcpy(d_screen, reduceScreen, sizeArray, cudaMemcpyHostToDevice);
-			//CalcInput << <1, 1 >> >(d_screen, d_Input, d_numInput);
-			//cudaMemcpy(&lastInput, d_Input, sizeInt, cudaMemcpyDeviceToHost);
-			////std::cout << *d_Input << std::endl;
-			////std::cout << *d_numInput << std::endl;
-			//cudaFree(d_Input);
-			//cudaFree(d_numInput);
-			//cudaFree(d_screen);
-			//numCalls = 0;
-			////free(d_Input); free(d_numInput);
-#pragma endregion
 		}
 	}
+	StoreScreen();
 	//Store state action pairs
 	//Seenms like an array of 200-250 values is what I have with full screen.
 	//Multiple arrays didn't work either. I'm seriously just limited in how many I get...
@@ -415,7 +416,8 @@ void DeepLearner::GetScreen(){
 }
 
 void DeepLearner::GameOver(bool isWin){
-	//Modify weights to decrease the value of what happened.
+	//Modify weights to decrease the value of what happened if loss happened
+	learn(isWin);
 }
 
 void DeepLearner::SwitchAlgorithm(type algoType){
@@ -423,8 +425,50 @@ void DeepLearner::SwitchAlgorithm(type algoType){
 	algo = algoType;
 }
 
-void DeepLearner::learn(){
-	//Keep practicing Games over and over
+void DeepLearner::learn(bool isWin){
+	float increase = (isWin) ? 0.01 : -0.01;
+	int NumScreens = (FullStorage) ? 225 : screenStorageCount;
+
+#pragma region rewards
+	//Iterate over the screens stored so far
+	for (int i = 0; i < NumScreens; ++i){
+		//Reward the neurons weight that gave a positive input to the output neuron
+#pragma region Output Weight reward
+		//Need to change outputWeights size is 10 * numInputs
+		//There are 10 hidden neurons that all connect to the desired output neuron
+		//Reward all 10 based on their contribution
+		for (int weightIndex = 0; weightIndex < 10; ++weightIndex){
+			//Stride would be 10, inputStorage is which one to start at
+			//Increase weight by 1 percent
+			outputWeights[inputStorage[i] * 10 + weightIndex] *= (1.0f + increase);
+		}
+#pragma endregion
+
+#pragma region Hidden Weight Reward
+		//Need to change firstHiddenWeights size is 50 * 50 * 10
+		//There are 2500 input neurons that all connect to each hidden neuron
+		//Rewarding all of them based on their contirubtion, doesn't seem right
+
+		//Reward them by a percentage based on their weight to the desired output neuron
+		//Iterate over all previous inputs
+		for (int i = 0; i < NumScreens; ++i){
+			//Iterate over all 10 hidden neurons
+			for (int hiddenIndex = 0; hiddenIndex < 10; ++hiddenIndex){
+				//Get weight to output neuron
+				float weight = outputWeights[10 * inputStorage[i] + hiddenIndex];
+
+				//Iterate over all the input nodes and increase the firstHiddenWeights value
+				for (int inputWeightIndex = 0; inputWeightIndex < 2500; ++inputWeightIndex){
+					//Stride is 2500
+					firstHiddenWeights[hiddenIndex * 2500 + inputWeightIndex] += weight * increase;
+				}
+			}
+		}
+
+#pragma endregion
+
+#pragma endregion
+	}
 }
 
 void DeepLearner::play(){
@@ -432,3 +476,7 @@ void DeepLearner::play(){
 }
 
 #pragma endregion
+
+void DeepLearner::ResetScore(){
+	lastScore = 0;
+}

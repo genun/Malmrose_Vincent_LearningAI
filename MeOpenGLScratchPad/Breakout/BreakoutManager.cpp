@@ -41,12 +41,12 @@ void BreakoutManager::Update(){
 
 //No more failing for you
 void BreakoutManager::Fail(){
-	//*cont = false;
+	*cont = false;
 }
 
 //Turn dat winning off.
 void BreakoutManager::WinGame(){
-	//*win = true;
+	*win = true;
 }
 
 bool BreakoutManager::Collide(glm::vec3 pos, float width, float height){
@@ -80,8 +80,16 @@ bool BreakoutManager::Collide(glm::vec3 pos, float width, float height){
 
 #pragma region Initialization
 
-void BreakoutManager::init(int* width, int* height){
-	ai.Initialize(&score, width, height, 3, 0.1f);
+void BreakoutManager::init(){
+}
+
+void BreakoutManager::setAI(DeepLearner &newAI, int* width, int* height){
+	newAI.Initialize(&score, width, height, 3, 0.1f);
+	ai = newAI;
+}
+
+void BreakoutManager::setAI(DeepLearner& newAI){
+	ai = newAI;
 }
 
 BreakoutManager::BreakoutManager()

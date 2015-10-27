@@ -17,11 +17,15 @@ class DeepLearner
 	int* width;
 	int* height;
 	int* score;
+	int* inputStorage;
+	int lastScore;
 	int rWidth;
 	int rHeight;
 	int numCalls;
 	int lastInput;
 	int numInput;
+	
+	int screenStorageCount;
 
 	float* reduceScreen;
 	float* inputWeights;
@@ -31,6 +35,10 @@ class DeepLearner
 	float* bias;
 	float* outputWeights;
 
+	//Will store the screen as the 400x300 greyscaled image
+	float* screenStorage;
+
+	bool FullStorage;
 	void GetScreen();
 
 public:
@@ -40,8 +48,10 @@ public:
 	void Initialize(int* score, int* widthPoint, int* heightPoint, int numInput, float learningRate, type algoType = type::DEEP);
 	void GameOver(bool isWin);
 	void SwitchAlgorithm(type algoType);
-	void learn();
+	void learn(bool isWin);
 	void play();
+	void StoreScreen();
+	void ResetScore();
 
 	DeepLearner();
 	~DeepLearner();

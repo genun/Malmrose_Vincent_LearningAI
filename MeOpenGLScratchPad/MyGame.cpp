@@ -77,7 +77,7 @@ bool MyGame::shutdown(){
 
 void MyGame::Breakout(){
 	win = false;
-	breakManage.init(&width, &height);
+	breakManage.init();
 	breakManage.ball = new Ball();
 	vec3 scaleBallSpeed = vec3(1.0f);
 	vec3 ballVelocity = vec3(-1.0f, +2.0f, 0.0f);
@@ -90,6 +90,7 @@ void MyGame::Breakout(){
 	isBreakout = true;
 	breakManage.cont = cont;
 	breakManage.win = &win;
+
 }
 
 void MyGame::newFrame(){
@@ -249,6 +250,14 @@ void MyGame::updateCameraFromKeyboard(){
 }
 
 #pragma endregion
+
+void MyGame::setAI(DeepLearner& newAI){
+	breakManage.setAI(newAI, &width, &height);
+}
+
+void MyGame::AttachAI(DeepLearner& newAI){
+	breakManage.setAI(newAI);
+}
 
 //Old code, might use but will delete soon.
 /*

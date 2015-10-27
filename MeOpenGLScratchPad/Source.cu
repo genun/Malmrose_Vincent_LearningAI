@@ -6,6 +6,7 @@
 #include "Asteroids\AsterMain.h"
 #include "Other_Tests\RBM.h"
 #include <iostream>
+#include "AI\DeepLearner.h"
 
 bool Test_Asteroids = false;
 bool Testing_Others = false;
@@ -28,13 +29,17 @@ int main(int argumentCount, char* argumentVector[]){
 		QApplication app(argumentCount, argumentVector);
 
 		MyGame game;
+		DeepLearner AI;
+		game.setAI(AI);
 		while (cont){
 			if (!game.initialize(&cont))
 				return;
 
 			game.gameLoop();
+			game.AttachAI(AI);
 
 			app.exec();
+			AI.ResetScore();
 
 			game.shutdown();
 			app.closeAllWindows();
