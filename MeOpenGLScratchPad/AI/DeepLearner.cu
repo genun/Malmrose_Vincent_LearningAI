@@ -22,10 +22,10 @@ void DeepLearner::Initialize(int* scorePoint, int* widthPoint, int* heightPoint,
 	score = scorePoint;
 	width = widthPoint;
 	rWidth = *width / 2;
-	qDebug() << "Width: " << width << endl << "Reduce Width: " << rWidth << endl;
+	//qDebug() << "Width: " << width << endl << "Reduce Width: " << rWidth << endl;
 	height = heightPoint;
 	rHeight = *height / 2;
-	qDebug() << "height: " << height << endl << "Reduce height: " << rHeight << endl;
+	//qDebug() << "height: " << height << endl << "Reduce height: " << rHeight << endl;
 	numInput = Number_Of_Inputs;
 	algo = algoType;
 	lr = learningRate;
@@ -33,13 +33,29 @@ void DeepLearner::Initialize(int* scorePoint, int* widthPoint, int* heightPoint,
 	numCalls = 0;
 	lastInput = 0;
 	reduceScreen = new float[rWidth * rHeight];
-	weights = new float[50 * 50];
+	inputWeights = new float[50 * 50];
 	for (int i = 0; i < 50 * 50; ++i){
-		weights[i] = rand.randomFloat();
+		inputWeights[i] = rand.randomFloat();
+	}
+
+	//Number of hidden nodes * number of input nodes
+	firstHiddenWeights = new float[10 * (50*50)];
+	for (int i = 0; i < 10 * 50 * 50; ++i){
+		firstHiddenWeights[i] = rand.randomFloat();
+	}
+	
+	bias = new float[10];
+	for (int i = 0; i < 10; ++i){
+		bias[i] = -1 * rand.randomInRange(0, 40.0f);
+	}
+
+	outputWeights = new float[10 * numInput];
+	for (int i = 0; i < 10 * numInput; ++i){
+		outputWeights[i] = rand.randomFloat();
 	}
 }
 
-DeepLearner::DeepLearner()
+DeepLearner::DeepLearner() : f_RandomChance(0.1) 
 {
 
 }
@@ -62,14 +78,49 @@ DeepLearner::~DeepLearner()
 //	*d_Input = intensity % *d_numInput;// *d_numInput - 1;
 //}
 
-__global__ void CalcInput(float* screen, float* weight, int* d_Votes, int* d_numInput){
+//__global__ void updateInput(float* screen, float* weight, float* )
+__global__ void CalcInput(float* screen, float* weight, float* d_Votes){
 	int id = threadIdx.x + blockDim.x * blockIdx.x;
 
-	float hold = (screen[id]/* * weight[id]*/) * 100.0f;
-	//printf("Intensity: %f", screen[id]);
-	//printf("weight: %f", weight[id]);
-	//printf("Intensity + weight: %f", hold);
-	d_Votes[id] = ((int)hold) % *d_numInput;// *d_numInput - 1;
+	d_Votes[id] = screen[id] * weight[id];
+}
+
+__global__ void FirstHidden(float* input, float* weight, float* bias, int d_numVotes, int* d_votes){
+	int id = threadIdx.x + blockDim.x * blockIdx.x;
+
+	float total = 0.0f;
+
+	//printf("Num Votes: %i", d_numVotes);
+
+	for (int i = 0; i < d_numVotes; ++i){
+		//if (weight[id*d_numVotes + i] > 0) printf("Weight higher than 0: %f", weight[id*d_numVotes + i]);
+		//if (input[i] > 0) printf("Input: %f ", input[i]);
+		//printf("Weight: %f\n", weight[id * d_numVotes + i]);
+
+		total += input[i] * weight[id * d_numVotes + i];
+	}
+
+	//Should use sigmoid here. Maybe Could be in for loop though
+	total += *bias;
+	//printf("Total: %f\n", total);
+	total = (int)(1 / (1 + exp(-total))) % 3;
+	//total = ((int)(total)) % 3;
+
+	//printf("Total: %f\n", total);
+	d_votes[id] = total;
+}
+
+__global__ void OutputLayer(float* hiddenVotes, float* weight, int d_numHiddenNodes, float* d_votes){
+	int id = threadIdx.x + blockDim.x * blockIdx.x;
+	
+	d_votes[id] = 0.0f;
+
+	for (int i = 0; i < d_numHiddenNodes; ++i){
+		//printf("Hidden Votes: %f, Weight: %f\n", hiddenVotes[i], weight[id * d_numHiddenNodes + i]);
+		d_votes[id] += hiddenVotes[i] * weight[id * d_numHiddenNodes + i];
+	}
+
+	printf("Votes: %f\n", d_votes[id]);
 }
 
 __global__ void GreyScreen(float* d_pixelsR, float* d_pixelsG, float* d_pixelsB,
@@ -89,12 +140,19 @@ __global__ void GreyScreen(float* d_pixelsR, float* d_pixelsG, float* d_pixelsB,
 int  DeepLearner::GetInput(vector<float*> screengrab){
 	numCalls++;
 	if (numCalls > 3){
+#pragma region Random Input
 		if (rand.randomInRange(0, 1) < f_RandomChance){
 			lastInput = rand.randomInRange(0, numInput);
+			numCalls = 0;
 		}
-		else{
-			GetScreen();
+#pragma endregion
 
+		else{
+
+//Screen maniputlation only works for 800x600 screens currently. Changes to a screen of 400x300 greyscaled
+//Also stores the 8x6 mini pixel set in the variable screenbits
+#pragma region screen manipulation
+			GetScreen();
 			//Seperate the reduce screen into 8x6 chunks.
 			//Average the intensity for those pixels.
 			float* screenBits = new float[50 * 50];
@@ -115,21 +173,20 @@ int  DeepLearner::GetInput(vector<float*> screengrab){
 					if (intense > 0.0f){
 						//qDebug() << "Intense value: " << intense;
 					}
-					screenBits[bitsIndex] = (intense / ((float)numPixels));
+					screenBits[bitsIndex] = (intense) / ((float)numPixels);
 					++bitsIndex;
 				}
 			}
 
-			for (int i = 0; i < 50 * 50; ++i){
-				if (screenBits[i] > 0.0f){
-					//qDebug() << "Index: " << i << " Value: " << screenBits[i];
-				}
-			}
+#pragma endregion
 
-			float* d_screen;// = screenBits;
-			float* d_weights;// = weights;
-			int* d_numInput;// = &numInput;
-			int* d_Votes;// = new int[50 * 50];
+//Get all the inputs times their weight and store it in the array InputVotes
+#pragma region Input Weights
+			float* d_screen;
+			float* d_weights;
+			int* d_numInput;
+			float* d_Votes;
+			float* InputVotes = new float[4 * 625];
 
 			int sizeInt = sizeof(int);
 			int sizeScreen = (50 * 50) *sizeof(float);
@@ -141,35 +198,88 @@ int  DeepLearner::GetInput(vector<float*> screengrab){
 			cudaMalloc((void**)&d_numInput, sizeInt);
 
 			cudaMemcpy(d_screen, screenBits, sizeScreen, cudaMemcpyHostToDevice);
-			cudaMemcpy(d_weights, weights, sizeWeights, cudaMemcpyHostToDevice);
+			cudaMemcpy(d_weights, inputWeights, sizeWeights, cudaMemcpyHostToDevice);
 			cudaMemcpy(d_numInput, &numInput, sizeInt, cudaMemcpyHostToDevice);
 
-			CalcInput <<< 4, 625 >>>(d_screen, d_weights, d_Votes, d_numInput);
+			CalcInput <<< 4, 625 >>>(d_screen, d_weights, d_Votes);
 
-			int* votes = new int[4 * 625];
-
-			cudaMemcpy(votes, d_Votes, sizeWeights, cudaMemcpyDeviceToHost);
+			cudaMemcpy(InputVotes, d_Votes, sizeWeights, cudaMemcpyDeviceToHost);
 
 			cudaFree(d_Votes);
 			cudaFree(d_numInput);
 			cudaFree(d_screen);
 			cudaFree(d_numInput);
 
-			int* tally = new int[numInput];
-			for (int i = 0; i < numInput; ++i){
-				tally[i] = 0;
-			}
-			for (int i = 0; i < 4 * 625 - 1; ++i){
-				tally[votes[i]]++;
-				if (votes[i] > 0){
-					//qDebug() << "Vote: " << i << " " << votes[i];
-				}
-			}
+#pragma endregion
 
-			int tallyCount = 0;
+//Run sigmoid on all input and store the votes or output in the array HiddenVotes
+#pragma region FirstHidden
+			float* d_InputVotes;
+			float* d_FHW;
+			float* d_bias;
+			int* d_HiddenVotes;
+			int* HiddenVotes;
+
+			int sizeFHW = (10 * 50 * 50) *sizeof(float);
+			int sizeHidden = 10 * sizeof(float);
+			int sizeInputVotes = 50 * 50 * sizeof(float);
+			int sizeBias = 10 * sizeof(float);
+
+			cudaMalloc((void**)&d_FHW, sizeFHW);
+			cudaMalloc((void**)&d_HiddenVotes, sizeHidden);
+			cudaMalloc((void**)&d_InputVotes, sizeInputVotes);
+			cudaMalloc((void**)&d_bias, sizeBias);
+			HiddenVotes = new int[10];
+
+			cudaMemcpy(d_FHW, firstHiddenWeights, sizeFHW, cudaMemcpyHostToDevice);
+			cudaMemcpy(d_InputVotes, InputVotes, sizeInputVotes, cudaMemcpyHostToDevice);
+			cudaMemcpy(d_bias, bias, sizeBias, cudaMemcpyHostToDevice);
+
+			//Input votes, Hidden weights, Number of Inputs, Votes array
+			FirstHidden <<<1, 10 >>>(d_InputVotes, d_FHW, d_bias, 50 * 50, d_HiddenVotes);
+
+			cudaMemcpy(HiddenVotes, d_HiddenVotes, sizeHidden, cudaMemcpyDeviceToHost);
+			
+			cudaFree(d_InputVotes); cudaFree(d_FHW); cudaFree(d_HiddenVotes);
+
+#pragma endregion
+
+//Connect all hidden nodes to the output nodes. Store values in the array votes
+#pragma region output
+			float* d_outputHiddenVotes;
+			float* d_outputWeights;
+			float* d_votes;
+			float* votes;
+
+			votes = new float[3];
+			
+			int sizeHiddenOutput = 10 * sizeof(float);
+			int sizeWeightsOutput = 10 * numInput * sizeof(float);
+			int sizeVotesOutput = numInput * sizeof(float);
+
+			cudaMalloc((void**)&d_outputHiddenVotes, sizeHiddenOutput);
+			cudaMalloc((void**)&d_outputWeights, sizeWeightsOutput);
+			cudaMalloc((void**)&d_votes, sizeVotesOutput);
+
+			cudaMemcpy(d_outputHiddenVotes, HiddenVotes, sizeHiddenOutput, cudaMemcpyHostToDevice);
+			cudaMemcpy(d_outputWeights, outputWeights, sizeWeightsOutput, cudaMemcpyHostToDevice);
+
+			//The number of threads is the number of inputs possible, so Left or Right
+			//The third varaible is the number of hidden layers
+			OutputLayer <<<1, 3 >>>(d_outputHiddenVotes, d_outputWeights, 10, d_votes);
+
+			cudaMemcpy(votes, d_votes, sizeVotesOutput, cudaMemcpyDeviceToHost);
+
+			cudaFree(d_outputHiddenVotes); cudaFree(d_outputWeights); cudaFree(d_votes);
+#pragma endregion
+
+#pragma region Tally Votes
+			//TODO: tally is currently a memory leak. I should fix when I can
+			int tally = 0.0f;
 			for (int i = 0; i < numInput; ++i){
-				qDebug() << "Input: " << i << " Tally: " << tally[i];
-				if (tallyCount < tally[i]){
+				qDebug() << "Input: " << i << " Tally: " << votes[i];
+				if (tally < votes[i]){
+					tally = votes[i];
 					lastInput = i;
 				}
 			}
@@ -179,8 +289,11 @@ int  DeepLearner::GetInput(vector<float*> screengrab){
 
 			delete[] screenBits;
 			//delete[] tally;
+			delete[] InputVotes;
+			delete[] HiddenVotes;
 			delete[] votes;
 			numCalls = 0;
+#pragma endregion
 
 #pragma region First CalcInput code
 			//It works, don't wanna delete

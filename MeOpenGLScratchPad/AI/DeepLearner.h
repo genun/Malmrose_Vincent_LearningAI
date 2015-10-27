@@ -24,9 +24,12 @@ class DeepLearner
 	int numInput;
 
 	float* reduceScreen;
-	float* weights;
+	float* inputWeights;
+	float* firstHiddenWeights;
 	float lr;
 	float f_RandomChance;
+	float* bias;
+	float* outputWeights;
 
 	void GetScreen();
 
@@ -43,7 +46,6 @@ public:
 	DeepLearner();
 	~DeepLearner();
 };
-
 
 //
 //#include <iostream>
