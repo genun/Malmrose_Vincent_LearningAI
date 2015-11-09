@@ -1,4 +1,5 @@
 #include "Ball.h"
+#include <qt\qdebug.h>
 #include <iostream>
 
 
@@ -43,10 +44,10 @@ void Ball::KeyboardInput(){
 
 void Ball::CheckWallCollision(){
 	glm::vec3 CheckCollisionPosition = pos + vel * (1.0f / 30.0f);
-	if (CheckCollisionPosition.x > 4.5 || CheckCollisionPosition.x < -4.5){
+	if (CheckCollisionPosition.x > 10.5 || CheckCollisionPosition.x < -10.5){
 		vel.x = -vel.x;
 	}
-	if (CheckCollisionPosition.y < -4 || CheckCollisionPosition.y > 3.2){
+	if (/*CheckCollisionPosition.y < -8 ||*/ CheckCollisionPosition.y > 8.2){
 		vel.y = -vel.y;
 	}
 }
@@ -57,16 +58,48 @@ void Ball::Bounce(){
 
 void Ball::Collide(glm::vec3 OtherPos, float width, float height){
 	//std::cout << "Collided" << std::endl;
-	float percentXLeft = (pos.x - rad)/ (OtherPos.x - width);
-	float percentXRight = (pos.x + rad) / (OtherPos.x - width);;
-	float percentYTop = (pos.y - rad) / (OtherPos.y - height);;
-	float percentYBot = (pos.y + rad) / (OtherPos.y - height);;
 
-	float xPercent = (percentXLeft > percentXRight) ? percentXLeft : percentXRight;
+
+	if (pos.y <= OtherPos.y - (height / 2)){
+		qDebug() << "Bounce Y";
+		vel.y = vel.y * -1;
+	}
+
+	else if (pos.y >= OtherPos.y + (height / 2)){
+		qDebug() << "Bounce Y";
+		vel.y = vel.y * -1;
+	}
+
+	else if (pos.x < OtherPos.x){
+		qDebug() << "Bounce X";
+		vel.x = vel.x * -1;
+	}
+
+	else if(pos.x > OtherPos.x){
+		qDebug() << "Bounce X";
+		vel.x = vel.x * -1;
+	}
+
+/*
+	float x = pos.x;
+	if (x > 0) x *= -1;
+	if (OtherPos.x > 0) OtherPos.x *= -1;
+	float percentXLeft = (x - rad) - (OtherPos.x - width);
+	float percentXRigh = (x + rad) - (OtherPos.x + width);
+	float percentYTop = (pos.y - rad) - (OtherPos.y - height);
+	float percentYBot = (pos.y + rad) - (OtherPos.y + height);
+
+	float xPercent = (percentXLeft > percentXRigh) ? percentXLeft : percentXRigh;
 	float yPercent = (percentYTop > percentYBot ) ? percentYTop : percentYBot;
 
-	if (xPercent > yPercent) vel.x = vel.x * -1;
-	else vel.y = vel.y * -1;
+	if (xPercent > yPercent){
+		qDebug() << "Bounce Y";
+		vel.y = vel.y * -1;
+	}
+	else {
+		qDebug() << "Bounce X";
+		vel.x = vel.x * -1;
+	}*/
 }
 
 void Ball::PaddleCollide(){

@@ -60,6 +60,7 @@ class MyGame: public QObject{
 	bool isBreakout = false;
 	bool* cont;
 	bool win;
+	bool isQuitting = false;
 
 	BreakoutManager breakManage;
 

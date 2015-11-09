@@ -29,10 +29,21 @@ class DeepLearner
 
 	float* reduceScreen;
 	float* inputWeights;
+
+	//20 hidden nodes
 	float* firstHiddenWeights;
+
+	//15 hidden nodes
+	float* secondHiddenWeights;
+
+	//10 hidden nodes
+	float* thirdHiddenWeights;
 	float lr;
 	float f_RandomChance;
-	float* bias;
+
+	float* InputBias;
+	float* firstBias;
+	float* secondBias;
 	float* outputWeights;
 
 	//Will store the screen as the 400x300 greyscaled image

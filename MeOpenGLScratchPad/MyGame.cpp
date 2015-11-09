@@ -15,6 +15,7 @@
 #include <Qt\qapplication.h>
 #include <Qt\qdebug.h>
 #include <Shapes\ShapeMaker.h>
+#include <random>
 
 //using fastdelegate::MakeDelegate;
 using Neumont::ShapeGenerator;
@@ -23,11 +24,13 @@ using glm::mat4;
 using glm::vec3;
 using glm::vec4;
 
+float zDist = -14.0f;
+
 #pragma region Initialization
 bool MyGame::initialize(bool* gameCont){
 	if (!renderer.initialize())
 		return false;
-
+	isQuitting = false;
 	cont = gameCont;
 
 	window = new QWidget();
@@ -76,12 +79,16 @@ bool MyGame::shutdown(){
 #pragma endregion
 
 void MyGame::Breakout(){
+	Random rand;
 	win = false;
 	breakManage.init();
 	breakManage.ball = new Ball();
 	vec3 scaleBallSpeed = vec3(1.0f);
-	vec3 ballVelocity = vec3(-1.0f, +2.0f, 0.0f);
-	breakManage.ball->Init(vec3(-2.0f, -1.0f, -6.0f), ballVelocity * scaleBallSpeed, 1.0f);
+	float yRange = glm::normalize(rand.randomInRange(-2.0f, -1.0f)) * rand.randomInRange(1.5f, 3.0f);
+	float xRange = rand.randomInRange(-2.0f, 2.0f);
+	float ballSpeed = 3.0f;
+	vec3 ballVelocity = glm::normalize(vec3(xRange, yRange, 0.0f)) * ballSpeed;
+	breakManage.ball->Init(vec3(-2.0f, -1.0f, zDist), ballVelocity * scaleBallSpeed, 0.85f);
 	breakManage.paddle = new Paddle();
 
 	positionBricks();
@@ -90,7 +97,6 @@ void MyGame::Breakout(){
 	isBreakout = true;
 	breakManage.cont = cont;
 	breakManage.win = &win;
-
 }
 
 void MyGame::newFrame(){
@@ -108,6 +114,7 @@ void MyGame::newFrame(){
 
 	if (!*cont) {
 		*cont = true;
+		isQuitting = true;
 		//QApplication::quit();
 		QCoreApplication::exit(0);
 	}
@@ -134,13 +141,13 @@ void MyGame::renderStuff(){
 }
 
 void MyGame::positionBricks(){
-	float width = 2.0 * 0.09f;
+	float width = 2.0 * 0.25f;
 	float height = 2.0 * 0.013f;
 	for (int i = 0; i < breakManage.brickLineHeight; i++){
 		for (int j = 0; j < breakManage.brickLineWidth; j++){
 			breakManage.bricks[j][i] = new Brick();
-			vec3 brickPosition = vec3(-3.75 + j * 1.05f, 2.75 + i * -0.75f, 2 - 8.0f);
-			Renderable* hold = makeBrick(glm::translate(brickPosition)*glm::scale(vec3(0.40f, 0.20f, 0.10f)));
+			vec3 brickPosition = vec3(-9.60 + j * 1.75f, 5.75 + i * -0.75f, zDist);
+			Renderable* hold = makeBrick(glm::translate(brickPosition)*glm::scale(vec3(0.80f, 0.20f, 0.01f)));
 			/*glm::rotate(180.0f, vec3(0.0f, 1.0f, 0.0f))*/
 			breakManage.bricks[j][i]->Init(brickPosition, hold, width, height);
 		}
@@ -148,10 +155,10 @@ void MyGame::positionBricks(){
 }
 
 void MyGame::positionPaddle(){
-	float width = 1.35f;
+	float width = 0.95f;
 	float height = 0.01f;
-	vec3 paddlePos = vec3(-2.0f, -3.0f, -6.0f);
-	mat4 scale = glm::scale(vec3(1.5f, 0.20f, 0.10f));
+	vec3 paddlePos = vec3(-2.0f, -6.5f, zDist);
+	mat4 scale = glm::scale(vec3(1.0f, 0.20f, 0.01f));
 	breakManage.paddle->Init(paddlePos, 1.0f, makeBrick(glm::translate(paddlePos) * scale), scale, width, height);
 }
 

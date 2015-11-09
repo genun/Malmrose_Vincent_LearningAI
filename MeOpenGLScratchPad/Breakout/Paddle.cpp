@@ -13,8 +13,8 @@ Paddle::~Paddle(void)
 }
 
 void Paddle::Update(inputType input){
-	float fLeftMax = -3.25f;
-	float fRightMax = 3.0f;
+	float fLeftMax = -9.65f;
+	float fRightMax = 9.5f;
 	if (input == inputType::LEFT && pos.x > fLeftMax){
 		pos = pos - glm::vec3(speed, 0, 0) * 0.1f;
 	}

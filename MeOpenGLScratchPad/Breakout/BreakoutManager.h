@@ -8,8 +8,8 @@
 class BreakoutManager
 {
 public:
-	static const int brickLineWidth = 8;
-	static const int brickLineHeight = 3;
+	static const int brickLineWidth = 12;
+	static const int brickLineHeight = 4;
 
 	DeepLearner ai;
 	Ball* ball;

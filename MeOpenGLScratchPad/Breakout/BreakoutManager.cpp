@@ -1,8 +1,11 @@
 #include <iostream>
 #include "BreakoutManager.h"
+#include <random>
 
 void BreakoutManager::Update(){
-	if (ball->pos.y < -3.8) Fail();
+	if (!*cont) return;
+
+	if (ball->pos.y < -7.8) Fail();
 	checkCollision();
 	ball->Update();
 
@@ -14,7 +17,7 @@ void BreakoutManager::Update(){
 	int input = ai.GetInput(emptyGrab);
 	switch (input){
 	case 0:
-		paddleInput = Paddle::inputType::LEFT;
+		paddleInput = Paddle::inputType::NONE;
 		break;
 	case 1:
 		paddleInput = Paddle::inputType::LEFT;
@@ -23,7 +26,7 @@ void BreakoutManager::Update(){
 		paddleInput = Paddle::inputType::RIGHT;
 		break;
 	}
-#pragma endregiondd
+#pragma endregion
 
 #pragma region Keyboard Input
 	if (GetAsyncKeyState('A'))
@@ -39,14 +42,14 @@ void BreakoutManager::Update(){
 	}
 }
 
-//No more failing for you
 void BreakoutManager::Fail(){
+	ai.learn(false);
 	*cont = false;
 }
 
 //Turn dat winning off.
 void BreakoutManager::WinGame(){
-	*win = true;
+	//*win = true;
 }
 
 bool BreakoutManager::Collide(glm::vec3 pos, float width, float height){
@@ -84,7 +87,7 @@ void BreakoutManager::init(){
 }
 
 void BreakoutManager::setAI(DeepLearner &newAI, int* width, int* height){
-	newAI.Initialize(&score, width, height, 3, 0.1f);
+	newAI.Initialize(&score, width, height, 3, 0.0005f);
 	ai = newAI;
 }
 
