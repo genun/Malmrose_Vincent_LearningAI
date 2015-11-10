@@ -53,6 +53,7 @@ class DeepLearner
 	void GetScreen();
 
 public:
+	bool pause = false;
 
 
 	int GetInput(std::vector<float*> screengrab);

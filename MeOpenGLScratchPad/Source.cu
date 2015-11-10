@@ -30,13 +30,13 @@ int main(int argumentCount, char* argumentVector[]){
 
 		MyGame game;
 		DeepLearner AI;
-		game.setAI(AI);
+		game.setAI(&AI);
 		while (cont){
 			if (!game.initialize(&cont))
 				return;
 
 			game.gameLoop();
-			game.AttachAI(AI);
+			game.AttachAI(&AI);
 
 			app.exec();
 			AI.ResetScore();

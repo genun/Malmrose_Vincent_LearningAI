@@ -14,7 +14,7 @@ void BreakoutManager::Update(){
 #pragma region AI input
 	//Screen Grab
 	std::vector<float*> emptyGrab;
-	int input = ai.GetInput(emptyGrab);
+	int input = ai->GetInput(emptyGrab);
 	switch (input){
 	case 0:
 		paddleInput = Paddle::inputType::NONE;
@@ -43,13 +43,16 @@ void BreakoutManager::Update(){
 }
 
 void BreakoutManager::Fail(){
-	ai.learn(false);
-	*cont = false;
+	if (!ai->pause){
+		ai->learn(false);
+		ai->pause = true;
+		*cont = false;
+	}
 }
 
 //Turn dat winning off.
 void BreakoutManager::WinGame(){
-	//*win = true;
+	*win = true;
 }
 
 bool BreakoutManager::Collide(glm::vec3 pos, float width, float height){
@@ -86,17 +89,18 @@ bool BreakoutManager::Collide(glm::vec3 pos, float width, float height){
 void BreakoutManager::init(){
 }
 
-void BreakoutManager::setAI(DeepLearner &newAI, int* width, int* height){
-	newAI.Initialize(&score, width, height, 3, 0.0005f);
+void BreakoutManager::setAI(DeepLearner* newAI, int* width, int* height){
+	newAI->Initialize(&score, width, height, 3, 0.01f);
 	ai = newAI;
 }
 
-void BreakoutManager::setAI(DeepLearner& newAI){
+void BreakoutManager::setAI(DeepLearner* newAI){
 	ai = newAI;
 }
 
 BreakoutManager::BreakoutManager()
 {
+
 }
 
 BreakoutManager::~BreakoutManager()

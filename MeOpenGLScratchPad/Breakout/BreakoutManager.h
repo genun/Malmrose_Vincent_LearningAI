@@ -11,7 +11,7 @@ public:
 	static const int brickLineWidth = 12;
 	static const int brickLineHeight = 4;
 
-	DeepLearner ai;
+	DeepLearner* ai;
 	Ball* ball;
 	Brick* bricks[brickLineWidth][brickLineHeight];
 	Paddle* paddle;
@@ -27,8 +27,8 @@ public:
 	void Fail();
 	void WinGame();
 	void init();
-	void setAI(DeepLearner &newAI, int* width, int* height);
-	void setAI(DeepLearner& newAI);
+	void setAI(DeepLearner* newAI, int* width, int* height);
+	void setAI(DeepLearner* newAI);
 
 	BreakoutManager();
 	~BreakoutManager();

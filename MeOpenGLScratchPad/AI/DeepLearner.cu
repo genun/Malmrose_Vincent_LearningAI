@@ -72,7 +72,7 @@ void DeepLearner::Initialize(int* scorePoint, int* widthPoint, int* heightPoint,
 	//Bias is currently generic numbers
 	//Bias is set for specifically for breakout
 	for (int i = 0; i < 20; ++i){
-		firstBias[i] = -1 * rand.randomInRange(175, 200);
+		firstBias[i] = -1 * rand.randomInRange(43, 52);// 175, 200);
 	}
 
 	secondBias = new float[15];
@@ -151,7 +151,6 @@ __global__ void FirstHidden(float* input, float* weight, float* bias, int d_numV
 
 	//total /= d_numVotes;
 
-	//Should use sigmoid here. Maybe Could be in for loop though
 	//printf("Total: %f\n", total);
 	total += bias[id];
 	//printf("Total: %f\n", total);
@@ -215,6 +214,7 @@ void DeepLearner::StoreScreen(){
 }
 
 int  DeepLearner::GetInput(vector<float*> screengrab){
+	if (pause) return 0;
 	numCalls++;
 	float* screenBits = new float[50 * 50];
 	GetScreen();
@@ -228,7 +228,7 @@ int  DeepLearner::GetInput(vector<float*> screengrab){
 	if (numCalls > 3){
 #pragma region Random Input
 		if (rand.randomInRange(0, 1) < f_RandomChance){
-			lastInput = rand.randomInRange(0, numInput);
+			lastInput = rand.randomInRange(0, numInput -1);
 			numCalls = 0;
 			//f_RandomChance = 0.00f;
 		}
@@ -267,48 +267,48 @@ int  DeepLearner::GetInput(vector<float*> screengrab){
 
 			//Get all the inputs times their weight change it up into 2x2 squares and store it in the array InputVotes
 #pragma region Input Weights
-			float* InputVotes = new float[625];
+			float* InputVotes = new float[625];//2304];
 
-			//for (int i = 0; i < 50 * 50; i++){
-				//qDebug() << "Screen Bits: " << screenBits[i];
+			//3x3 overlapping implementation
+
+			//for (int r = 0; r < 48; ++r){
+			//	for (int c = 0; c < 48; ++c){
+			//		float total = 0;
+			//		//First row
+			//		total += screenBits[r * 50 + c] * inputWeights[r * 50 + c];
+			//		total += screenBits[r * 50 + c + 1] * inputWeights[r * 50 + c + 1];
+			//		total += screenBits[r * 50 + c + 2] * inputWeights[r * 50 + c + 2];
+
+			//		//Second row
+			//		total += screenBits[(r + 1) * 50 + c] * inputWeights[(r + 2) * 50 + c];
+			//		total += screenBits[(r + 1) * 50 + c + 1] * inputWeights[(r + 2) * 50 + c + 1];
+			//		total += screenBits[(r + 1) * 50 + c + 2] * inputWeights[(r + 2) * 50 + c + 2];
+
+			//		//Third row
+			//		total += screenBits[(r + 2) * 50 + c] * inputWeights[(r + 2) * 50 + c];
+			//		total += screenBits[(r + 2) * 50 + c + 1] * inputWeights[(r + 2) * 50 + c + 1];
+			//		total += screenBits[(r + 2) * 50 + c + 2] * inputWeights[(r + 2) * 50 + c + 2];
+
+			//		total += InputBias[r * 48 + c];
+			//		InputVotes[r * 48 + c] = total;// (1 / (1 + exp(total)));
+			//	}
 			//}
-			
+
+			//2x2 no overlap implementation
+
 			for (int r = 0; r < 50; r += 2){
 				for (int c = 0; c < 50; c += 2){
 					float total = 0;
-
-					//qDebug() << "Screen weight 1: " << screenBits[r * 50 + c];
-					//qDebug() << "Screen weight 2: " << screenBits[r * 50 + c + 1];
-					//qDebug() << "Screen weight 3: " << screenBits[(r + 1) * 50 + c];
-					//qDebug() << "Screen weight 4: " << screenBits[(r + 1) * 50 + c + 1];
-					
-					//qDebug() << "Input weight 1: " << inputWeights[r * 50 + c];
-					//qDebug() << "Input weight 2: " << inputWeights[r * 50 + c + 1];
-					//qDebug() << "Input weight 3: " << inputWeights[(r + 1) * 50 + c];
-					//qDebug() << "Input weight 4: " << inputWeights[(r + 1) * 50 + c + 1];
-
 					total += screenBits[r * 50 + c] * inputWeights[r * 50 + c];
 					total += screenBits[r * 50 + c + 1] * inputWeights[r * 50 + c + 1];
 					total += screenBits[(r + 1) * 50 + c] * inputWeights[(r + 1) * 50 + c];
 					total += screenBits[(r + 1) * 50 + c + 1] * inputWeights[(r + 1) * 50 + c + 1];
-
-					//qDebug() << "Total: " << total;
-
 					//r and c are based on 50x50 grid. Divide by two to get 25x25 grid
-					total += InputBias[(r / 2) * 25 + (c / 2)];
-
-					//qDebug() << "Total with bias: " << total;
-
+					//total += InputBias[(r / 2) * 25 + (c / 2)];
 					//Sigmoid everything!
-					InputVotes[(r / 2) * 25 + (c / 2)] =  (1 / (1 + exp(total)));
-					//qDebug() << InputVotes[(r / 2) * 25 + (c / 2)];
+					InputVotes[(r / 2) * 25 + (c / 2)] = total;// (1 / (1 + exp(total)));
 				}
 			}
-
-			//for (int i = 0; i < 25 * 25; ++i){
-			//	if (InputVotes[i] > -1)
-			//		qDebug() << "Vote: " << i << " " << InputVotes[i];
-			//}
 
 			//Cuda implementation of old input votes
 
@@ -502,7 +502,7 @@ int  DeepLearner::GetInput(vector<float*> screengrab){
 #pragma region Tally Votes
 
 			//TODO: tally is currently a memory leak. I should fix when I can
-			int tally = -INT_MAX;
+			float tally = -FLT_MAX;
 			for (int i = 0; i < numInput; ++i){
 				qDebug() << "Input: " << i << " Tally: " << votes[i];
 				if (tally < votes[i]){
@@ -666,17 +666,17 @@ __global__ void updateHidden(float* input, float* weight, float* bias, int d_num
 
 		//d_numVotes is the stride
 		float sig = input[i] * weight[id * d_numVotes + i];
-		total += (1 / (1 + exp(-sig)));
+		total += sig;// (1 / (1 + exp(-sig)));
 	}
 
 	//Should use sigmoid here. Maybe Could be in for loop though
-	total += bias[id];
 	//printf("Total: %f\n", total);
+	total += bias[id];
 	//printf("Bias: %f\n", bias[id]);
 	total = (1 / (1 + exp(-total)));
 	//total = ((int)(total)) % 3;
 
-	//printf("Total: %f\n", total);
+	//printf("Total: %i:%f\n", id, total);
 	d_votes[id] = total;
 #pragma endregion
 
@@ -684,6 +684,16 @@ __global__ void updateHidden(float* input, float* weight, float* bias, int d_num
 	for (int i = 0; i < d_numVotes; ++i){
 		weight[id * d_numVotes + i] = weight[id * d_numVotes + i] - (error * learningRate * ((1 / (1 + exp(-total))) * (1 - (1 / (1 + exp(-total))))));
 	}
+	
+	float biasTotal = total * 2 - 1;
+	//printf("Bias Total: %i: %f\n", id, biasTotal);
+	//printf("Error: %f\n", error);
+	//printf("Bias: %i, %f\n", id, bias[id]);
+	//printf("Bias subtraction: %i, %f\n", id, biasTotal * error * learningRate);
+	bias[id] = bias[id] - biasTotal * error * learningRate;
+	//printf("Bias: %i, %f\n", id, bias[id]);
+	//printf("Bias Total: %i: %f\n", id, bias[id]);
+
 #pragma endregion
 }
 
@@ -697,10 +707,10 @@ __global__ void updateWeight(float* weightsInput, int numHiddenNodes, float* wei
 
 void DeepLearner::learn(bool isWin){
 	if (f_RandomChance > 0.10) {
-		f_RandomChance -= 0.0001f;
+		f_RandomChance -= 0.01f;
 	}
 	//1-2 layer
-	float increase = (isWin) ? +0.01 : -0.01;
+	float increase = (isWin) ? +0.01 : -0.05;
 	int NumScreens = (FullStorage) ? 225 : screenStorageCount;
 
 	//INTENTIONAL ERROR, starting at the numscreens and decrementing. Isn't right because last screen is at screenStorageCount. Here for simplicity currently.
@@ -712,7 +722,7 @@ void DeepLearner::learn(bool isWin){
 	//Iterate over second layer with first layer inputs, use update above
 	//Iterate over third layer, with second layer inputs, use update above
 	//Iterate over output layer, 
-	for (int i = 0; i < 30; ++i){
+	for (int i = 0; i < 15; ++i){
 	//for (int i = NumScreens - 1; i > 0; --i){
 		int UpdateScreen = rand.randomInRange(0, NumScreens - 2);
 		float* screenBits = new float[50 * 50];
@@ -757,6 +767,21 @@ void DeepLearner::learn(bool isWin){
 				InputVotes[(r / 2) * 25 + (c / 2)] = (1 / (1 + exp(total)));
 			}
 		}
+#pragma region Input biases
+
+		for (int i = 0; i < 25 * 25; ++i){
+			if (InputVotes[i] > 0.5){
+				InputBias[i] -= increase * lr;
+			}
+			else{
+				InputBias[i] += increase * lr;
+			}
+		}
+		//for (int i = 0; i < 25 * 25; ++i){
+		//	qDebug() << "Input Votes: " << i << ": " << InputVotes[i];
+		//}
+
+#pragma endregion
 
 		//float* d_screen;
 		//float* d_weights;
@@ -782,6 +807,7 @@ void DeepLearner::learn(bool isWin){
 		//cudaFree(d_numInput);
 #pragma endregion
 
+		//qDebug() << "First Learn";
 #pragma region update first layer
 		float* d_InputVotes;
 		float* d_FHW;
@@ -809,6 +835,11 @@ void DeepLearner::learn(bool isWin){
 
 		cudaMemcpy(FirstHiddenVotes, d_FirstHiddenVotes, sizeHidden, cudaMemcpyDeviceToHost);
 		cudaMemcpy(firstHiddenWeights, d_FHW, sizeFHW, cudaMemcpyDeviceToHost);
+		cudaMemcpy(firstBias, d_bias, sizeBias, cudaMemcpyDeviceToHost);
+
+		//for (int j = 0; j < 20; ++j){
+		//	qDebug() << "First bias: " << j << ": " << firstBias[j];
+		//}
 
 		cudaFree(d_FHW);
 		cudaFree(d_FirstHiddenVotes);
@@ -816,6 +847,7 @@ void DeepLearner::learn(bool isWin){
 		cudaFree(d_bias);
 #pragma endregion
 
+		//qDebug() << "Second Learn";
 #pragma region update second layer
 		float* d_SHW;
 		float* d_SecondHiddenVotes;
@@ -840,6 +872,7 @@ void DeepLearner::learn(bool isWin){
 		updateHidden << <1, 15 >> >(d_InputVotes, d_SHW, d_bias, 20, d_SecondHiddenVotes, lr, increase);
 
 		cudaMemcpy(/*SecondHiddenVotes*/HiddenVotes, d_SecondHiddenVotes, sizeSecondHidden, cudaMemcpyDeviceToHost);
+		cudaMemcpy(secondBias, d_bias, sizeBias, cudaMemcpyDeviceToHost);
 		cudaMemcpy(secondHiddenWeights, d_SHW, sizeSHW, cudaMemcpyDeviceToHost);
 
 		cudaFree(d_bias);
@@ -912,8 +945,7 @@ void DeepLearner::learn(bool isWin){
 		//	qDebug() << i << " " << HiddenVotes[i];
 		//}
 
-		//TODO: tally is currently a memory leak. I should fix when I can
-		int tally = 0.0f;
+		float tally = -FLT_MAX;
 		for (int i = 0; i < numInput; ++i){
 			//qDebug() << "Input: " << i << " Tally: " << votes[i];
 			if (tally < votes[i]){

@@ -258,12 +258,14 @@ void MyGame::updateCameraFromKeyboard(){
 
 #pragma endregion
 
-void MyGame::setAI(DeepLearner& newAI){
+void MyGame::setAI(DeepLearner* newAI){
 	breakManage.setAI(newAI, &width, &height);
+	newAI->pause = false;
 }
 
-void MyGame::AttachAI(DeepLearner& newAI){
+void MyGame::AttachAI(DeepLearner* newAI){
 	breakManage.setAI(newAI);
+	breakManage.ai->pause = false;
 }
 
 //Old code, might use but will delete soon.

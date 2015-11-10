@@ -381,7 +381,7 @@ c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\vector_types.h
 C:\Program Files (x86)\Windows Kits\8.1\Include\um\GL/glu.h
 C:\Program Files (x86)\Windows Kits\8.1\Include\shared\winapifamily.h
 C:\Program Files (x86)\Windows Kits\8.1\Include\um\GL/gl.h
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core/_fixes.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core/_fixes.hpp
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\climits
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\cfloat
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\float.h
@@ -400,73 +400,73 @@ C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\initializer_list
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\cstdio
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core/setup.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\./core/_detail.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core/setup.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\./core/_detail.hpp
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\cassert
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\assert.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\./core/type.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_half.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_half.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_float.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_int.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_gentype.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_size.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec1.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\_swizzle.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\_swizzle_func.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec1.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec2.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec2.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec3.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec3.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec4.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec4.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x2.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x2.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x3.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x3.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x4.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x4.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x2.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x2.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x3.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x3.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x4.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x4.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x2.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x2.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x3.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x3.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x4.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x4.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\./core/func_trigonometric.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\func_trigonometric.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\./core/func_exponential.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\func_exponential.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\./core/func_common.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\_fixes.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\func_common.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\./core/func_packing.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\func_packing.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\./core/func_geometric.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\func_geometric.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\./core/func_matrix.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\func_matrix.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\./core/func_vector_relational.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\func_vector_relational.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\./core/func_integer.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\func_integer.inl
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\./core/func_noise.hpp
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\glm\glm\core\func_noise.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\./core/type.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_half.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_half.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_float.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_int.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_gentype.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_size.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec1.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\_swizzle.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\_swizzle_func.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec1.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec2.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec2.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec3.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec3.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec4.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_vec4.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x2.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x2.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x3.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x3.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x4.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat2x4.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x2.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x2.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x3.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x3.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x4.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat3x4.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x2.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x2.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x3.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x3.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x4.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\type_mat4x4.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\./core/func_trigonometric.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\func_trigonometric.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\./core/func_exponential.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\func_exponential.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\./core/func_common.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\_fixes.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\func_common.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\./core/func_packing.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\func_packing.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\./core/func_geometric.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\func_geometric.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\./core/func_matrix.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\func_matrix.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\./core/func_vector_relational.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\func_vector_relational.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\./core/func_integer.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\func_integer.inl
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\_vectorize.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\./core/func_noise.hpp
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\glm\glm\core\func_noise.inl
 C:\Program Files (x86)\Windows Kits\8.1\Include\um\gl\GL.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\algorithm
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xmemory
@@ -535,18 +535,18 @@ C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\map
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\tuple
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\vector
-d:\school\capstone\code\malmrose_vincent_learningai\middleware\qt\include\qtcore\qpoint.h
-d:\school\capstone\code\malmrose_vincent_learningai\meopenglscratchpad\ai\DeepLearner.h
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\middleware\qt\include\qtcore\qpoint.h
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\meopenglscratchpad\ai\DeepLearner.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\cuda.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\device_launch_parameters.h
-D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\StateAction.h
-D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Asteroids\Random.h
-D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\\Engine\Vector2d.h
+D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\StateAction.h
+D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\Asteroids\Random.h
+D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\\Engine\Vector2d.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\iostream
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\math.h
-D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\\Core\include\Core.h
-d:\school\capstone\code\malmrose_vincent_learningai\meopenglscratchpad\core\include\window.h
+D:\school\Capstone\Code\Malmrose_Vincent_LearningAI\Malmrose_Vincent_LearningAI\MeOpenGLScratchPad\\Core\include\Core.h
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\meopenglscratchpad\core\include\window.h
 C:\Program Files (x86)\Windows Kits\8.1\Include\um\windows.h
 C:\Program Files (x86)\Windows Kits\8.1\Include\shared\sdkddkver.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\excpt.h
@@ -645,13 +645,13 @@ C:\Program Files (x86)\Windows Kits\8.1\Include\um\winsvc.h
 C:\Program Files (x86)\Windows Kits\8.1\Include\um\mcx.h
 C:\Program Files (x86)\Windows Kits\8.1\Include\um\imm.h
 C:\Program Files (x86)\Windows Kits\8.1\Include\um\ime_cmodes.h
-d:\school\capstone\code\malmrose_vincent_learningai\meopenglscratchpad\core\include\input.h
-d:\school\capstone\code\malmrose_vincent_learningai\meopenglscratchpad\core\include\Core.h
-d:\school\capstone\code\malmrose_vincent_learningai\meopenglscratchpad\core\include\graphics.h
-d:\school\capstone\code\malmrose_vincent_learningai\meopenglscratchpad\core\include\Core.h
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\meopenglscratchpad\core\include\input.h
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\meopenglscratchpad\core\include\Core.h
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\meopenglscratchpad\core\include\graphics.h
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\meopenglscratchpad\core\include\Core.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\random
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\device_launch_parameters.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\curand.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\cuda_runtime.h
-d:\school\capstone\code\malmrose_vincent_learningai\meopenglscratchpad\ai\CudaCode\ScreenManipulation.cu
+d:\school\capstone\code\malmrose_vincent_learningai\malmrose_vincent_learningai\meopenglscratchpad\ai\CudaCode\ScreenManipulation.cu
