@@ -25,6 +25,7 @@ using glm::vec3;
 using glm::vec4;
 
 float zDist = -14.0f;
+vec3 startSpeed;
 
 #pragma region Initialization
 bool MyGame::initialize(bool* gameCont){
@@ -70,10 +71,11 @@ void MyGame::gameLoop(){
 }
 
 bool MyGame::shutdown(){
+	breakManage.Shutdown();
 	bool ret = true;
 	ret &= renderer.shutdown();
+	ret &= debugMenu.shutdown();
 	timer.stop();
-	breakManage.~BreakoutManager();
 	return ret;
 }
 #pragma endregion
@@ -86,10 +88,13 @@ void MyGame::Breakout(){
 	vec3 scaleBallSpeed = vec3(1.0f);
 	float yRange = glm::normalize(rand.randomInRange(-2.0f, -1.0f)) * rand.randomInRange(1.5f, 3.0f);
 	float xRange = rand.randomInRange(-2.0f, 2.0f);
+	if (xRange > -0.2f && xRange < 0.2f) xRange = 0.3f;
 	float ballSpeed = 3.0f;
 	vec3 ballVelocity = glm::normalize(vec3(xRange, yRange, 0.0f)) * ballSpeed;
 	breakManage.ball->Init(vec3(-2.0f, -1.0f, zDist), ballVelocity * scaleBallSpeed, 0.85f);
 	breakManage.paddle = new Paddle();
+	startSpeed = ballVelocity;
+
 
 	positionBricks();
 	positionPaddle();
@@ -115,8 +120,7 @@ void MyGame::newFrame(){
 	if (!*cont) {
 		*cont = true;
 		isQuitting = true;
-		//QApplication::quit();
-		QCoreApplication::exit(0);
+		resetGame();
 	}
 
 	if (GetAsyncKeyState(VK_ESCAPE)){
@@ -126,10 +130,39 @@ void MyGame::newFrame(){
 
 	if (win){
 		*cont = true;
-		QCoreApplication::exit(0);
-
+		shutdown();
+		initialize(cont);
 	}
 	//ball->Update();
+	//*cont = false;
+	//QCoreApplication::exit(0);
+}
+
+void MyGame::resetGame(){
+	timer.stop();
+	//Reveal all bricks
+	for (int i = 0; i < breakManage.brickLineHeight; i++){
+		for (int j = 0; j < breakManage.brickLineWidth; j++){
+			breakManage.bricks[j][i]->destroyed = false;
+			breakManage.bricks[j][i]->img->isVisible = true;
+		}
+	}
+
+	//Reposition ball
+	breakManage.ball->pos = vec3(-2.0f, -1.0f, zDist);
+	breakManage.ball->vel = startSpeed;
+
+	//Reposition paddle
+	vec3 paddlePos = vec3(-2.0f, -6.5f, zDist);
+	//mat4 scale = glm::scale(vec3(1.0f, 0.20f, 0.01f));
+	breakManage.paddle->pos = paddlePos;
+
+	//Enable all continue or pause variables
+	breakManage.score = 0;
+	timer.start();
+	breakManage.ai->ResetScore();
+	breakManage.ai->pause = false;
+	*cont = true;
 }
 
 #pragma region Renderer initializtion
@@ -163,7 +196,7 @@ void MyGame::positionPaddle(){
 }
 
 void MyGame::positionBall(){
-	breakManage.ball->img = makeBall(glm::translate(breakManage.ball->pos) * glm::scale(vec3(0.25f)));
+	breakManage.ball->img = makeBall(glm::translate(breakManage.ball->pos) * glm::scale(vec3(0.55f)));
 }
 
 void MyGame::generateGeometries(){

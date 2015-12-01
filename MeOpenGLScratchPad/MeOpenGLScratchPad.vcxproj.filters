@@ -37,6 +37,12 @@
     <ClCompile Include="Other_Tests\RBM.cpp" />
     <ClCompile Include="Breakout\BreakoutManager.cpp" />
     <ClCompile Include="StateAction.cpp" />
+    <ClCompile Include="myBitMap.cpp" />
+    <ClCompile Include="Simple OpenGL Image Library\src\image_DXT.c" />
+    <ClCompile Include="Simple OpenGL Image Library\src\image_helper.c" />
+    <ClCompile Include="Simple OpenGL Image Library\src\SOIL.c" />
+    <ClCompile Include="Simple OpenGL Image Library\src\stb_image_aug.c" />
+    <ClCompile Include="Simple OpenGL Image Library\src\test_SOIL.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rendering\Renderer.h" />
@@ -87,6 +93,13 @@
     <ClInclude Include="Breakout\BreakoutManager.h" />
     <ClInclude Include="AI\DeepLearner.h" />
     <ClInclude Include="StateAction.h" />
+    <ClInclude Include="myBitMap.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\image_DXT.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\image_helper.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\SOIL.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\stb_image_aug.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\stbi_DDS_aug.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\stbi_DDS_aug_c.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugTools\Shapes\VertexShader.glsl" />
@@ -106,6 +119,7 @@
     <None Include="ShaderCode\GrowlitheVertexShader.glsl" />
     <None Include="ShaderCode\PizzaVertexShader.glsl" />
     <None Include="ShaderCode\PizzaFragmentShader.glsl" />
+    <None Include="Simple OpenGL Image Library\soil.html" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\ShapeNormalMap.png" />

@@ -32,4 +32,5 @@ public:
 
 	BreakoutManager();
 	~BreakoutManager();
+	void Shutdown();
 };

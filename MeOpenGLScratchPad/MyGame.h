@@ -83,6 +83,7 @@ public:
 	void setAI(DeepLearner* newAI);
 	void rayTriangleIntersect(glm::vec3 rayOrigin, glm::vec3 ray_direciton, MyShapeData shape, float* minIntersection, glm::mat4 whereMat);
 	void AttachAI(DeepLearner* newAI);
+	void resetGame();
 	MyGame() {}
 };
 

@@ -8,9 +8,10 @@
 #include <iostream>
 #include "AI\DeepLearner.h"
 
-bool Test_Asteroids = false;
 bool Testing_Others = false;
+bool Test_Asteroids = false;
 bool cont = true;
+//Bla
 
 int main(int argumentCount, char* argumentVector[]){
 	if (Testing_Others){
@@ -43,6 +44,8 @@ int main(int argumentCount, char* argumentVector[]){
 
 			game.shutdown();
 			app.closeAllWindows();
+			app.exit();
+			app.quit();
 		}
 	};
 

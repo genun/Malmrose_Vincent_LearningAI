@@ -53,13 +53,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Engine;$(SolutionDir)\Core\include;$(ProjectDir);$(SourceDir)..\Middleware\Qt\include;$(SourceDir)..\Middleware\glew\include;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\include;$(SolutionDir)..\Core\include;$(SolutionDir)\Testing_Others;$(CUDA_INC_PATH);$(CUDA_PATH);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Engine;$(SolutionDir)\Core\include;$(ProjectDir);$(SourceDir)..\Middleware\Qt\include;$(SourceDir)..\Middleware\glew\include;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\include;$(SolutionDir)..\Core\include;$(SolutionDir)\Testing_Others;$(CUDA_INC_PATH);$(CUDA_PATH);$(SolutionDir)..\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)\Core\lib;$(SolutionDir)$(Configuration)\;$(SourceDir)..\Middleware\glew\lib;$(SourceDir)..\Middleware\Qt\lib;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\lib;$(CudaToolkitLibDir);$(CUDA_PATH)\lib\x64;$(CUDA_PATH_V7_5);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;Core.lib;QtCored4.lib;QtGuid4.lib;QtOpenGLd4.lib;glew32d.lib;opengl32.lib;NeumontTools.lib;cudart.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)\Core\lib;$(SolutionDir)$(Configuration)\;$(SourceDir)..\Middleware\glew\lib;$(SourceDir)..\Middleware\Qt\lib;$(SourceDir)..\Middleware\glm;$(SourceDir)..\Middleware\NeumontTools\lib;$(CudaToolkitLibDir);$(CUDA_PATH)\lib\x64;$(CUDA_PATH_V7_5);$(SolutionDir)..\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Engine.lib;Core.lib;QtCored4.lib;QtGuid4.lib;QtOpenGLd4.lib;glew32d.lib;opengl32.lib;NeumontTools.lib;cudart.lib;vld.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/fs %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -107,6 +107,12 @@
     <ClCompile Include="DebugTools\Menu\DebugMenu.cpp" />
     <ClCompile Include="DebugTools\Menu\Infos\CheckBoxInfo.cpp" />
     <ClCompile Include="DebugTools\Menu\Infos\SliderInfo.cpp" />
+    <ClCompile Include="myBitMap.cpp" />
+    <ClCompile Include="Simple OpenGL Image Library\src\image_DXT.c" />
+    <ClCompile Include="Simple OpenGL Image Library\src\image_helper.c" />
+    <ClCompile Include="Simple OpenGL Image Library\src\SOIL.c" />
+    <ClCompile Include="Simple OpenGL Image Library\src\stb_image_aug.c" />
+    <ClCompile Include="Simple OpenGL Image Library\src\test_SOIL.cpp" />
     <ClCompile Include="StateAction.cpp" />
     <CudaCompile Include="AI\CudaCode\ScreenManipulation.cu" />
     <CudaCompile Include="AI\DeepLearner.cu">
@@ -154,6 +160,7 @@
     <ClInclude Include="DebugTools\Menu\Infos\WatchInfo.h" />
     <ClInclude Include="DebugTools\Menu\Infos\SliderInfo.h" />
     <ClInclude Include="AI\DeepLearner.h" />
+    <ClInclude Include="myBitMap.h" />
     <ClInclude Include="MyGame.h" />
     <ClInclude Include="Other_Tests\RBM.h" />
     <ClInclude Include="Other_Tests\Utils.h" />
@@ -173,6 +180,12 @@
     <ClInclude Include="Shapes\MyShapeData.h" />
     <ClInclude Include="Shapes\MyVertex.h" />
     <ClInclude Include="Shapes\ShapeMaker.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\image_DXT.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\image_helper.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\SOIL.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\stbi_DDS_aug.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\stbi_DDS_aug_c.h" />
+    <ClInclude Include="Simple OpenGL Image Library\src\stb_image_aug.h" />
     <ClInclude Include="StateAction.h" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +206,7 @@
     <None Include="ShaderCode\TableVertexShader.glsl" />
     <None Include="ShaderCode\GrowlitheVertexShader.glsl" />
     <None Include="ShaderCode\GrowlitheFragmentShader.glsl" />
+    <None Include="Simple OpenGL Image Library\soil.html" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\OgreNormalMap.png" />

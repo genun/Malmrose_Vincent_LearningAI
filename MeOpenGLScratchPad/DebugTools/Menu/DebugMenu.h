@@ -29,6 +29,7 @@ public:
 	void DebugMenu::checkBox(const char* text, bool* value);
 	bool initialize(QVBoxLayout* theLayout);
 	void update();
+	static bool shutdown();
 
 };
 

@@ -26,7 +26,7 @@ void Ball::Update(){
 	pos = pos + vel * (1.0f / 30.0f);
 
 	//Update the renderable.
-	img->whereMatrix = glm::translate(pos) * glm::scale(glm::vec3(0.25f));
+	img->whereMatrix = glm::translate(pos) * glm::scale(glm::vec3(0.35f));
 }
 
 void Ball::KeyboardInput(){

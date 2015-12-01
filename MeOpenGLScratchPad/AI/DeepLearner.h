@@ -18,25 +18,30 @@ class DeepLearner
 	int* height;
 	int* score;
 	int* inputStorage;
+	int* keypressStorage;
+
 	int lastScore;
 	int rWidth;
 	int rHeight;
 	int numCalls;
 	int lastInput;
 	int numInput;
-	
 	int screenStorageCount;
+	int firstHiddenWeightsSize;
+	int numFirstHiddenNeurons;
+	int screenSize;
+	int numScreenHistory;
 
 	float* reduceScreen;
 	float* inputWeights;
 
-	//20 hidden nodes
+	//256 hidden nodes
 	float* firstHiddenWeights;
 
-	//15 hidden nodes
+	//Unused 15 hidden nodes
 	float* secondHiddenWeights;
 
-	//10 hidden nodes
+	//Unused 10 hidden nodes
 	float* thirdHiddenWeights;
 	float lr;
 	float f_RandomChance;
@@ -48,6 +53,11 @@ class DeepLearner
 
 	//Will store the screen as the 400x300 greyscaled image
 	float* screenStorage;
+
+	float* FirstLayerFire;
+	float* OutputLayerTotals;
+	float* FirstLayerStorage;
+	float* OutputLayerStorage;
 
 	bool FullStorage;
 	void GetScreen();
@@ -62,7 +72,7 @@ public:
 	void SwitchAlgorithm(type algoType);
 	void learn(bool isWin);
 	void play();
-	void StoreScreen();
+	void StoreScreen(float* screenBits);
 	void ResetScore();
 
 	DeepLearner();

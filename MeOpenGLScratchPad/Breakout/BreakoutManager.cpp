@@ -103,9 +103,19 @@ BreakoutManager::BreakoutManager()
 
 }
 
+void BreakoutManager::Shutdown(){
+	score = 0;
+	delete ball;
+	delete paddle;
+	for (int i = 0; i < brickLineHeight; i++){
+		for (int j = 0; j < brickLineWidth; j++){
+			delete bricks[j][i];
+		}
+	}
+}
+
 BreakoutManager::~BreakoutManager()
 {
-	score = 0;
 	//free(ball);
 	//free(paddle);
 	//free(bricks);

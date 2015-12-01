@@ -57,10 +57,12 @@ void DebugMenu::slideFloat(const char* text, float* value, float min, float max)
 
 bool DebugMenu::initialize(QVBoxLayout* theLayout){
 	/*assert(theLayout != 0);*/
+
+	if (instance != 0)
+		return false;
 	instance = new DebugMenu();
-	instance->layout = theLayout; 
+	instance->layout = theLayout;
 	instance->time = 1.0f;
-	return true;
 }
 
 void DebugMenu::checkBox(const char* text, bool* value){
@@ -71,4 +73,12 @@ void DebugMenu::checkBox(const char* text, bool* value){
 	c.init(value);
 	row->addWidget(c.checkBox);
 	checkInfos.append(c);
+}
+
+bool DebugMenu::shutdown(){
+	if (instance == 0)
+		return false;
+	delete instance;
+	instance = 0;
+	return true;
 }
